@@ -44,12 +44,27 @@ function User(userName, userEmail, userBank) {
 }
 
 Bet.prototype.getDisplayHTML = function () {
-  var html  = "<h1>" + this.betName  + "</h1> \
-  <p>" + this.betUser.userName + " is involved in this bet for " + this.betTerms;
+  var html  = '\
+  <li> \
+    <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#bet-details" aria-expanded="false" aria-controls="collapseExample">' + this.betName + '</button> \
+    <div class="collapse" id="bet-details">' + this.betTerms + '</div> \
+  </li>'
 
   return html;
 };
 
+/*
+<p>
+  <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+    Button with data-target
+  </button>
+</p>
+<div class="collapse" id="collapseExample">
+  <div class="card card-body">
+    Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident.
+  </div>
+</div>
+*/
 
 $(function(){
   $("#bet-form").submit(function(event){
@@ -68,10 +83,11 @@ $(function(){
 
     var newBet = new Bet(betName, user1, betNotes, betPenalty, false);
 
-    $(".bets").html(newBet.getDisplayHTML());
+    $("#active-bets").append(newBet.getDisplayHTML());
 
 
-
+    $("#bet-form").hide();
+    $("#active-bets").show();
     var currentBet = new Bet()
   })
 });

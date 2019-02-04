@@ -1,3 +1,5 @@
+
+
 input {
   display:block;
   margin-bottom: 10px;
@@ -5,4 +7,15 @@ input {
 
 button {
   display: block;
+}
+
+ul {
+  padding : 0;
+  text-align: center;
+  margin: auto;
+  background-color: skyblue;
+}
+
+li {
+  list-style-type: none;
 }
