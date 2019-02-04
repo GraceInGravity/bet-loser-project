@@ -17,11 +17,7 @@ Working as a team, create a website or application, employ branching strategy on
 Specification | Input | Output
 ------------- | ----- | ------
 User can create a bet
-A bet consists of
-* name and email of at least one bet participants
-* the conditions of the bet, the time frame by which the bet must be paid off
-* dthe type of penalty for paying off the bet
-Potential participants can accept invitations to participate in the bet
+A bet consists of: 1) name and email of at least one bet participant, 2) the conditions of the bet, 3) the time frame by which the bet must be paid off, 4) the type of penalty for paying off the bet
 A bet can be made with only one participant (can make a bet with self)
 User can identify which participant lost the bet
 Bet loser can provide proof of fulfilling the penalty
@@ -30,12 +26,27 @@ Bet loser can provide proof of fulfilling the penalty
 
 Specification | Input | Output
 ------------- | ----- | ------
-
+User can enter own name | |
+User can enter own email | |
+User can enter other participant name | |
+User can enter other participant email | |
+User can enter bet conditions | |
+User can enter bet time limit | |
+User can select penalty category | |
+User can enter quantity for penalty | |
+System will save bet data | |
+System will display bet data in UI | |
+User can identify loser of bet | |
+Bet loser can provide proof of fulfilling bet penalty | |
+System will mark bet as resolved when proof is received | |
+System will increase degree of penalty when time limit has been exceeded without proof of fulfillment | |
 
 
 ### Stretch Goals
 
-*
+* System generates and sends emails to entered addresses, inviting people to participate in bet
+* Potential participants can accept invitations to participate in the bet
+
 
 ## Setup/Installation Requirements
 

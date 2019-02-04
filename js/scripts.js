@@ -1,9 +1,10 @@
 function Bet(betName, betUser, betTerms, betPenalty, betLoser) {
   this.betName = betName;
-  this.betUser = betUser;
+  this.betUser = [];
   this.betTerms = betTerms;
   this.betPenalty = betPenalty;
   this.betLoser = betLoser;
+  this.currentId = 0;
 }
 
 function Penalty(penaltyCategory, penaltyTimeLimit, penaltyAmount) {
@@ -28,19 +29,25 @@ Penalty.prototype.cashBet = function(penaltyAmount, userName){
 
 Penalty.prototype.timeBet = function(penaltyAmount){
   return "You owe" + penaltyAmount + "hours working " + "for the winner";
-
 }
 
 Penalty.prototype.prankBet = function(){
-  return "You must" + "sing in the train station";
-
-
+  return "You must" + prank;  // ** prank needs to be defined
 }
 
 function User(userName, userEmail, userBank) {
   this.userName = userName;
   this.userEmail = userEmail;
   this.userBank = userBank;
+}
+
+Bet.prototype.addUser = function(user) {
+  this.users.push(user);
+}
+
+Bet.prototype.assignId = function() {
+  this.currentId += 1;
+  return this.currentId;
 }
 
 Bet.prototype.getDisplayHTML = function () {
