@@ -20,7 +20,7 @@ function User(userName, userEmail, userBank) {
 
 Bet.prototype.getDisplayHTML = function () {
   var html  = "<h1>" + this.betName  + "</h1> \
-  <p>" + this.betUser + " is involved in this bet for " + this.betTerms;
+  <p>" + this.betUser.userName + " is involved in this bet for " + this.betTerms;
 
   return html;
 };
@@ -38,7 +38,10 @@ $(function(){
     var betNotes = $("textarea[name='bet-notes']").val();
     var betPenalty = "Bet Penalty Goes Here";
 
-    var newBet = new Bet(betName, betUser1, betNotes, betPenalty, false);
+    var user1 = new User(betUser1, betUser1Email, 0);
+    var user2 = new User(betUser2, betUser2Email, 0);
+
+    var newBet = new Bet(betName, user1, betNotes, betPenalty, false);
 
     $(".bets").html(newBet.getDisplayHTML());
 
