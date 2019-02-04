@@ -14,6 +14,7 @@ ul {
   text-align: center;
   margin: auto;
   background-color: skyblue;
+  display: none;
 }
 
 li {

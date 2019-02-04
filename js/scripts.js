@@ -89,5 +89,10 @@ $(function(){
     $("#bet-form").hide();
     $("#active-bets").show();
     var currentBet = new Bet()
-  })
+  });
+
+  $("#addBet").click(function() {
+    $("#active-bets").hide();
+    $("#bet-form").show();
+  });
 });
