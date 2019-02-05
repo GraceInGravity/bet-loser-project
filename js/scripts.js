@@ -1,15 +1,16 @@
 function BetBook() {
   this.bets = [];
-  this.betId = 0;
+  this.currentBetIndex = 0;
 }
 
 BetBook.prototype.addBet = function (bet) {
+  this.assignId(bet);
   this.bets.push(bet);
 };
 
 BetBook.prototype.assignId = function (bet) {
-  this.betId += 1;
-  bet.id = this.betId;
+  this.currentBetIndex += 1;
+  bet.id = this.currentBetIndex;
 }
 
 function Bet(betName, betTerms, betPenalty) {
@@ -18,8 +19,37 @@ function Bet(betName, betTerms, betPenalty) {
   this.betTerms = betTerms;
   this.betPenalty = betPenalty;
   this.betLoser = "";
-  this.currentId = 0;
+  this.currentUserIndex = 0;
 }
+
+Bet.prototype.addUser = function(user) {
+  this.assignId(user);
+  this.betUsers.push(user);
+}
+
+Bet.prototype.assignId = function(user) {
+  this.currentUserIndex += 1;
+  user.id = this.currentUserIndex;
+}
+
+Bet.prototype.getDisplayHTML = function () {
+  var html  = '\
+  <li class="col-md-4 card" id="' + this.id + '"> \
+    <button class="card-header" type="button" data-toggle="collapse" data-target="#details'+ this.id + '" aria-expanded="false" aria-controls="collapseExample">' + this.betName + '</button> \
+    <div class="collapse" id="details' + this.id + '"> \
+      <div class="card-body"> \
+        <p class="card-text">' + this.betTerms + '</p> \
+        <h5 class="card-title">Participants</h5> \
+        <p class="card-text"><span class="betUser>">' + this.betUsers[0].userName + '</span><span class="betUser">' + this.betUsers[1].userName + '</span></p> \
+        <h5 class="card-title">Stakes</h5> \
+        <p class="card-text">' + this.betPenalty.penaltyCategory + '</p> \
+        <p class="card-text">' + this.betPenalty.penaltyAmount + '</p> \
+      </div> \
+    <button type="button" class="complete" id="win-btn' + this.id + '" name="win-btn">select winner</button></div> \
+  </li>'
+
+  return html;
+};
 
 
 function Penalty(penaltyCategory, penaltyTimeLimit, penaltyAmount) {
@@ -71,34 +101,7 @@ function User(userName, userEmail, userBank) {
   this.userBank = userBank;
 }
 
-Bet.prototype.addUser = function(user) {
-  this.assignId(user);
-  this.betUsers.push(user);
-}
 
-Bet.prototype.assignId = function(user) {
-  this.currentId += 1;
-  user.id = this.currentId;
-}
-
-Bet.prototype.getDisplayHTML = function () {
-  var html  = '\
-  <li class="col-md-4 card" id="' + this.currentId + '"> \
-    <button class="card-header" type="button" data-toggle="collapse" data-target="#bet-details" aria-expanded="false" aria-controls="collapseExample">' + this.betName + '</button> \
-    <div class="collapse" id="bet-details"> \
-      <div class="card-body"> \
-        <p class="card-text">' + this.betTerms + '</p> \
-        <h5 class="card-title">Participants</h5> \
-        <p class="card-text"><span class="betUser>">' + this.betUsers[0].userName + '</span><span class="betUser">' + this.betUsers[1].userName + '</span></p> \
-        <h5 class="card-title">Stakes</h5> \
-        <p class="card-text">' + this.betPenalty.penaltyCategory + '</p> \
-        <p class="card-text">' + this.betPenalty.penaltyAmount + '</p> \
-      </div> \
-    <button type="button" class="complete" id="win-btn' + this.currentId + '" name="win-btn">select winner</button></div> \
-  </li>'
-
-  return html;
-};
 
 /*
 <p>
@@ -154,7 +157,6 @@ $(function(){
   });
 
   $("#active-bets").on("click", ".complete", function(){
-    console.log("hello from complete button");
     $(".results-display").show();
     $("label[for='user1']").text(betBook.bets[0].betUsers[0].userName);
     $("label[for='user2']").text(betBook.bets[0].betUsers[1].userName);
