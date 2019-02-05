@@ -94,7 +94,7 @@ Bet.prototype.getDisplayHTML = function () {
         <p class="card-text">' + this.betPenalty.penaltyCategory + '</p> \
         <p class="card-text">' + this.betPenalty.penaltyAmount + '</p> \
       </div> \
-    <button type="button" class="complete" name="win-btn">select winner</button></div> \
+    <button type="button" class="complete" id="win-btn' + this.currentId + '" name="win-btn">select winner</button></div> \
   </li>'
 
   return html;
@@ -171,10 +171,12 @@ $(function(){
     var amount = betBook.bets[0].betPenalty.penaltyAmount;
     var time = betBook.bets[0].betPenalty.penaltyTimeLimit;
     if (winner == 1) {
-      $(".resolution").html(user1 + " is the winner! <br>" + "You have " + time + " days to pay " + user2 + " $" + amount );
+      $("li#2").append(user1 + " is the winner! <br>" + "You have " + time + " days to pay " + user2 + " $" + amount );
+      $("#win-btn2").hide();
       console.log(time);
     } else if (winner ==2) {
-      $(".resolution").html(user2+ " is the winner! <br>" + "You have " + time + " days to pay " + user2 + " $" + amount);
+      $("li#2").append(user2+ " is the winner! <br>" + "You have " + time + " days to pay " + user2 + " $" + amount);
+      $("win-btn2").hide();
     }
 
   })
