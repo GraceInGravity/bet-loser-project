@@ -1,9 +1,23 @@
-function Bet(betName, betUser, betTerms, betPenalty, betLoser) {
+function BetBook() {
+  this.bets = [];
+  this.betId = 0;
+}
+
+BetBook.prototype.addBet = function (bet) {
+  this.bets.push(bet);
+};
+
+BetBook.prototype.assignId = function (bet) {
+  this.betId += 1;
+  bet.id = this.betId;
+}
+
+function Bet(betName, betTerms, betPenalty) {
   this.betName = betName;
-  this.betUser = [];
+  this.betUsers = [];
   this.betTerms = betTerms;
   this.betPenalty = betPenalty;
-  this.betLoser = betLoser;
+  this.betLoser = "";
   this.currentId = 0;
 }
 
@@ -42,17 +56,18 @@ function User(userName, userEmail, userBank) {
 }
 
 Bet.prototype.addUser = function(user) {
-  this.users.push(user);
+  this.assignId(user);
+  this.betUsers.push(user);
 }
 
-Bet.prototype.assignId = function() {
+Bet.prototype.assignId = function(user) {
   this.currentId += 1;
-  return this.currentId;
+  user.id = this.currentId;
 }
 
 Bet.prototype.getDisplayHTML = function () {
   var html  = '\
-  <li> \
+  <li class="col-md-4"> \
     <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#bet-details" aria-expanded="false" aria-controls="collapseExample">' + this.betName + '</button> \
     <div class="collapse" id="bet-details">' + this.betTerms + '</div> \
   </li>'
@@ -74,6 +89,8 @@ Bet.prototype.getDisplayHTML = function () {
 */
 
 $(function(){
+  var betBook = new BetBook();
+
   $("#bet-form").submit(function(event){
     console.log("hello from submit button");
     event.preventDefault();
@@ -82,13 +99,21 @@ $(function(){
     var betUser1Email = $("input[name='email1']").val();
     var betUser2 = $("input[name='user2']").val();
     var betUser2Email = $("input[name='email2']").val();
+    var betCategory = $("option[name='money']").val();
+    var betAmount = $("input[name='amount']").val();
     var betNotes = $("textarea[name='bet-notes']").val();
     var betPenalty = "Bet Penalty Goes Here";
 
     var user1 = new User(betUser1, betUser1Email, 0);
     var user2 = new User(betUser2, betUser2Email, 0);
+    var betPenalty = new Penalty(betCategory, 0, betAmount);
 
-    var newBet = new Bet(betName, user1, betNotes, betPenalty, false);
+    var newBet = new Bet(betName, betNotes, betPenalty, false);
+
+    newBet.addUser(user1);
+    newBet.addUser(user2);
+
+    betBook.addBet(newBet);
 
     $("#active-bets").append(newBet.getDisplayHTML());
 
@@ -101,5 +126,11 @@ $(function(){
   $("#addBet").click(function() {
     $("#active-bets").hide();
     $("#bet-form").show();
+  });
+
+  $(".complete").click(function(){
+    console.log("hello from complete button");
+    $("label[for='user1']").text(betBook.bets[0].betUsers[0].userName);
+    $("label[for='user2']").text(betBook.bets[0].betUsers[1].userName);
   });
 });

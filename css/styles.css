@@ -1,19 +1,17 @@
 
 
-input {
+input, select {
   display:block;
   margin-bottom: 10px;
 }
 
-button {
-  display: block;
-}
+
 
 ul {
   padding : 0;
   text-align: center;
   margin: auto;
-  background-color: skyblue;
+  /*background-color: skyblue;*/
   display: none;
 }
 
