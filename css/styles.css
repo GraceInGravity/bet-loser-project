@@ -18,3 +18,11 @@ li {
 .results-display {
   display: none;
 }
+
+.card {
+  padding: 0px;
+}
+
+.card-header {
+  width: 100%;
+}
