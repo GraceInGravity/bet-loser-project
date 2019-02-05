@@ -173,12 +173,12 @@ $(function(){
     var amount = betBook.bets[0].betPenalty.penaltyAmount;
     var time = betBook.bets[0].betPenalty.penaltyTimeLimit;
     if (winner == 1) {
-      $("li#2").append(user1 + " is the winner! <br>" + "You have " + time + " days to pay " + user2 + " $" + amount );
-      $("#win-btn2").hide();
+      $("li#1 .card-body").append(user1 + " is the winner! <br>" + "You have " + time + " days to pay " + user2 + " $" + amount );
+      $("#1 button:last-child").hide();
       console.log(time);
     } else if (winner ==2) {
-      $("li#2").append(user2+ " is the winner! <br>" + "You have " + time + " days to pay " + user2 + " $" + amount);
-      $("win-btn2").hide();
+      $("li#1 .card-body").append(user2+ " is the winner! <br>" + "You have " + time + " days to pay " + user2 + " $" + amount);
+      $("#1 button:last-child").hide();
     }
 
   })
