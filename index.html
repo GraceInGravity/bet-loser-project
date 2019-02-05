@@ -12,24 +12,25 @@
   <body>
     <div class="container">
       <h1>Bet Loser</h1>
+
       <form id="bet-form">
         <label for="bet-name">Bet Name</label>
-        <input type="text" name="bet-name" value="">
+        <input type="text" name="bet-name" value="Bet Name">
         <label for="user1">User1</label>
-        <input type="text" name="user1" value="">
+        <input type="text" name="user1" value="Ward">
         <label for="email1">Email1</label>
-        <input type="email" name="email1" value="">
+        <input type="email" name="email1" value="Ward@ward.com">
         <label for="user2">User2</label>
-        <input type="text" name="user2" value="">
+        <input type="text" name="user2" value="Tracy">
         <label for="email2">Email2</label>
-        <input type="email" name="email2" value="">
+        <input type="email" name="email2" value="Tracy@tracy.com">
         <select>
           <option name="money" value="money">Money</option>
         </select>
         <label for="amount">Amount of your bet</label>
-        <input type="number" name="amount" id="amount" value="">
+        <input type="number" name="amount" id="amount" value="100">
         <label for="bet-notes">Bet Notes</label>
-        <textarea name="bet-notes" rows="4" cols="40"></textarea>
+        <textarea name="bet-notes" rows="4" cols="40">Your bet desciption goes here</textarea>
         <button type="submit" name="submit">Submit</button>
       </form>
 
@@ -37,14 +38,14 @@
       </ul>
       <!-- <button id='addBet'>Add a new bet</button> -->
 
-      <div class="results-display">
+      <form class="results-display">
         <h3>Choose a Winner</h3>
         <label for="user1"></label>
         <input type="radio" id='user1' name="winner" value="1">
         <label for="user2"></label>
         <input type="radio" id='user2' name="winner" value="2">
-        <button type="button" class="complete" name="win-btn">Submit Winner</button>
-      </div>
+        <button type="button" id="win-chooser" name="button">Declare Winner</button>
+      </form>
 
     </div>
   </body>

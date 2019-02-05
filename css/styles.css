@@ -1,11 +1,7 @@
-
-
 input, select {
   display:block;
   margin-bottom: 10px;
 }
-
-
 
 ul {
   padding : 0;
@@ -17,4 +13,8 @@ ul {
 
 li {
   list-style-type: none;
+}
+
+.results-display {
+  display: none;
 }

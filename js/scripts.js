@@ -42,10 +42,9 @@ Penalty.prototype.cashBet = function(penaltyAmount, userName, whichCharity){
   var charityName = ["Habitat for Humanity", "Planned Parenthood", "Housing First", "Meals on Wheels" ]
   var charityEmail = ["darcie@habitatportlandmetro.org", "contact.us@ppfa.org", "info@naeh.org", "info@mealsonwheelsamerica.org" ]
   var charityWebsite = ["habitat.org", "plannedparenthood.org", "endhomelessness.org", "mealsonwheelsamerica.org" ]
-
   // Email donation letter to charityEmail[whichCharity];
 
-  return "You owe " + penaltyAmount + "dollars to " + charityName[whichCharity] "the winner!";
+  return "You owe " + penaltyAmount + "dollars to " + charityName[whichCharity] + "the winner!";
     // Button to continue
     // Display/open charityWebsite[whichCharity;]
 }
@@ -85,7 +84,7 @@ Bet.prototype.getDisplayHTML = function () {
   var html  = '\
   <li class="col-md-4"> \
     <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#bet-details" aria-expanded="false" aria-controls="collapseExample">' + this.betName + '</button> \
-    <div class="collapse" id="bet-details">' + this.betTerms + '</div> \
+    <div class="collapse" id="bet-details">' + this.betTerms + '<button type="button" class="complete" name="win-btn">select winner</button></div> \
   </li>'
 
   return html;
@@ -144,9 +143,12 @@ $(function(){
     $("#bet-form").show();
   });
 
-  $(".complete").click(function(){
+  $("#active-bets").on("click", ".complete", function(){
     console.log("hello from complete button");
+    $(".results-display").show();
     $("label[for='user1']").text(betBook.bets[0].betUsers[0].userName);
     $("label[for='user2']").text(betBook.bets[0].betUsers[1].userName);
   });
+
+  $("#bet-details button").click()
 });
