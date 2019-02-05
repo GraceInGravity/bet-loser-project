@@ -45,7 +45,7 @@ Bet.prototype.getDisplayHTML = function () {
         <p class="card-text">' + this.betPenalty.penaltyCategory + '</p> \
         <p class="card-text">' + this.betPenalty.penaltyAmount + '</p> \
       </div> \
-    <button type="button" class="complete" id="win-btn' + this.id + '" name="win-btn">select winner</button></div> \
+    <button type="button" class="complete" id="win-btn' + this.id + '" name="win-btn" data-toggle="modal" data-target="#declareWinnerModal">Select Winner</button></div> \
   </li>'
 
   return html;
@@ -146,7 +146,7 @@ $(function(){
     $("#active-bets").append(newBet.getDisplayHTML());
 
 
-    $("#exampleModal").modal("hide");
+    $("#addBetModal").modal("hide");
     $("#active-bets").show();
     var currentBet = new Bet()
   });
