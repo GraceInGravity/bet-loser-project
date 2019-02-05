@@ -13,8 +13,8 @@ function Penalty(penaltyCategory, penaltyTimeLimit, penaltyAmount) {
   this.penaltyAmount = penaltyAmount;
 }
 
-Penalty.prototype.cashBet = function(penaltyAmount, userName){
-  return "You owe " + penaltyAmount + "dollars to " + "the winner!";
+Penalty.prototype.cashBet = function(penaltyAmount, userName, whichCharity){
+
   // + userName;
   // How do we choose the other username??
 
@@ -25,14 +25,30 @@ Penalty.prototype.cashBet = function(penaltyAmount, userName){
   // T   Choose etsy, craigslist category etc
   //     Send out email with Amount and Item and website
 
+  var charityName = ["Habitat for Humanity", "Planned Parenthood", "Housing First", "Meals on Wheels" ]
+  var charityEmail = ["darcie@habitatportlandmetro.org", "contact.us@ppfa.org", "info@naeh.org", "info@mealsonwheelsamerica.org" ]
+  var charityWebsite = ["habitat.org", "plannedparenthood.org", "endhomelessness.org", "mealsonwheelsamerica.org" ]
+
+  // Email donation letter to charityEmail[whichCharity];
+
+  return "You owe " + penaltyAmount + "dollars to " + charityName[whichCharity] "the winner!";
+    // Button to continue
+    // Display/open charityWebsite[whichCharity;]
 }
 
-Penalty.prototype.timeBet = function(penaltyAmount){
-  return "You owe" + penaltyAmount + "hours working " + "for the winner";
+
+Penalty.prototype.timeBet = function(penaltyChoice, timeLevel){
+
+  var timeChoice = ["laundry", "child or pet sitting", "house cleaning", "car washing", "volunteer at charity of winner's choice", "jogging"]
+  return "You owe" + timeLevel + "hours doing " + timeChoice[penaltyChoice] + "for the winner";
+  // Replace for the winner with winner name
 }
 
-Penalty.prototype.prankBet = function(){
-  return "You must" + prank;  // ** prank needs to be defined
+Penalty.prototype.prankBet = function(prankLevel){
+
+  var prankList = ["sing in public 'Do You Want To Snowman'", "deliver flowers to your crush",  " get at least $20 from strangers", "Jump into the Willamette", " do the naked bike ride but not actually during the Naked Bike Ride", "wear a Make America Great Again hat to People's Coop"];
+
+  return "You must" + prankList[prankLevel];  // ** prank needs to be defined
 }
 
 function User(userName, userEmail, userBank) {
