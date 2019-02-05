@@ -9,8 +9,8 @@ BetBook.prototype.addBet = function (bet) {
 };
 
 BetBook.prototype.assignId = function (bet) {
-  this.currentBetIndex += 1;
   bet.id = this.currentBetIndex;
+  this.currentBetIndex += 1;
 }
 
 function Bet(betName, betTerms, betPenalty) {
@@ -28,13 +28,13 @@ Bet.prototype.addUser = function(user) {
 }
 
 Bet.prototype.assignId = function(user) {
-  this.currentUserIndex += 1;
   user.id = this.currentUserIndex;
+  this.currentUserIndex += 1;
 }
 
 Bet.prototype.getDisplayHTML = function () {
   var html  = '\
-  <li class="col-md-4 card" id="' + this.id + '"> \
+  <li class="col-md-4 card" id="list-item-' + this.id + '"> \
     <button class="card-header" type="button" data-toggle="collapse" data-target="#details'+ this.id + '" aria-expanded="false" aria-controls="collapseExample">' + this.betName + '</button> \
     <div class="collapse" id="details' + this.id + '"> \
       <div class="card-body"> \
@@ -45,17 +45,47 @@ Bet.prototype.getDisplayHTML = function () {
         <p class="card-text">' + this.betPenalty.penaltyCategory + '</p> \
         <p class="card-text">' + this.betPenalty.penaltyAmount + '</p> \
       </div> \
-    <button type="button" class="complete" id="win-btn' + this.id + '" name="win-btn" data-toggle="modal" data-target="#declareWinnerModal">Select Winner</button></div> \
+    <button type="button" class="complete" id="' + this.id + '" name="win-btn" data-toggle="modal" data-target="#declareWinnerModal">Select Winner</button></div> \
   </li>'
 
   return html;
 };
 
+function User(userName, userEmail, userBank) {
+  this.userName = userName;
+  this.userEmail = userEmail;
+  this.userBank = userBank;
+}
 
 function Penalty(penaltyCategory, penaltyTimeLimit, penaltyAmount) {
   this.penaltyCategory = penaltyCategory;
   this.penaltyTimeLimit = penaltyTimeLimit;
   this.penaltyAmount = penaltyAmount;
+}
+
+Bet.prototype.showPenalty = function(){
+  if(this.betPenalty.penaltyCategory === 'money') {
+    this.showMoneyPenalty(this.penaltyAmount);
+  } else if(this.penaltyCategory === 'charity') {
+    this.getCharityPenalty();
+  }
+}
+
+Bet.prototype.showMoneyPenalty = function() {
+  var winner = $("input:radio[name='winner']:checked").val();
+  var user1 = this.betUsers[0].userName;
+  var user2 = this.betUsers[1].userName;
+  var amount = this.betPenalty.penaltyAmount;
+  var time = this.betPenalty.penaltyTimeLimit;
+
+  if (winner == 1) {
+    $("#list-item-" + this.id + " .card-body").append(user1 + " is the winner! <br>" + "You have " + time + " days to pay " + user2 + " $" + amount );
+    $("#list-item-" + this.id + " button:last-child").hide();
+    console.log(time);
+  } else if (winner ==2) {
+    $("li#list-item-" + this.id + " .card-body").append(user2+ " is the winner! <br>" + "You have " + time + " days to pay " + user2 + " $" + amount);
+    $("#list-item-" + this.id + " button:last-child").hide();
+  }
 }
 
 Penalty.prototype.cashBet = function(penaltyAmount, userName, whichCharity){
@@ -95,29 +125,10 @@ Penalty.prototype.prankBet = function(prankLevel){
   return "You must" + prankList[prankLevel];  // ** prank needs to be defined
 }
 
-function User(userName, userEmail, userBank) {
-  this.userName = userName;
-  this.userEmail = userEmail;
-  this.userBank = userBank;
-}
-
-
-
-/*
-<p>
-  <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
-    Button with data-target
-  </button>
-</p>
-<div class="collapse" id="collapseExample">
-  <div class="card card-body">
-    Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident.
-  </div>
-</div>
-*/
 
 $(function(){
   var betBook = new BetBook();
+  var tempBetId = 0;
 
   $("#bet-form").submit(function(event){
     console.log("hello from submit button");
@@ -161,28 +172,12 @@ $(function(){
     $("label[for='user1']").text(betBook.bets[0].betUsers[0].userName);
     $("label[for='user2']").text(betBook.bets[0].betUsers[1].userName);
     $(".active-bet-name").text(betBook.bets[0].betName);
+
+    tempBetId = $(this).attr('id');
   });
 
-
-  $("#bet-details button").click()
-
   // working with #win-chooser button
-  $("#win-chooser").click(function(){
-    $(".results-display").hide();
-    var winner = $("input:radio[name='winner']:checked").val();
-    var user1 = betBook.bets[0].betUsers[0].userName;
-    var user2 = betBook.bets[0].betUsers[1].userName;
-    var amount = betBook.bets[0].betPenalty.penaltyAmount;
-    var time = betBook.bets[0].betPenalty.penaltyTimeLimit;
-    if (winner == 1) {
-      $("li#1 .card-body").append(user1 + " is the winner! <br>" + "You have " + time + " days to pay " + user2 + " $" + amount );
-      $("#1 button:last-child").hide();
-      console.log(time);
-    } else if (winner ==2) {
-      $("li#1 .card-body").append(user2+ " is the winner! <br>" + "You have " + time + " days to pay " + user2 + " $" + amount);
-      $("#1 button:last-child").hide();
-    }
-
-
-  })
+  $("#modal-winner-submit").click(function(){
+    betBook.bets[tempBetId].showPenalty();
+  });
 });

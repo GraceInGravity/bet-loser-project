@@ -31,8 +31,10 @@
               <input type="text" name="user2" value="Tracy">
               <label for="email2">Email2</label>
               <input type="email" name="email2" value="Tracy@tracy.com">
-              <select>
+              <label for="bet-select">Choose Your Wager Category</label>
+              <select name="bet-select">
                 <option name="money" value="money">Money</option>
+                <option name="prank" value="prank">Prank</option>
               </select>
               <label for="amount">Amount of your bet</label>
               <input type="number" name="amount" id="amount" value="100">
@@ -52,7 +54,7 @@
       <div class="bet-container">
         <div>
 
-          <a href="#"><img src="imgs/add-icon.png"  data-toggle="modal" data-target="#exampleModal"></a>
+          <a href="#"><img src="imgs/add-icon.png"  data-toggle="modal" data-target="#addBetModal"></a>
           <h2>Your Active Bets</h2>
 
 
@@ -79,7 +81,7 @@
                 <input type="radio" id='user1' name="winner" value="1">
                 <label for="user2"></label>
                 <input type="radio" id='user2' name="winner" value="2">
-                <button type="button" id="win-chooser" name="button"  data-dismiss="modal">Declare Winner</button>
+                <button type="button" id="modal-winner-submit" name="button"  data-dismiss="modal">Declare Winner</button>
               </form>
             </div>
           </div>
