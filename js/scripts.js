@@ -143,7 +143,7 @@ $(function(){
     $("#active-bets").append(newBet.getDisplayHTML());
 
 
-    $("#bet-form").hide();
+    $("#exampleModal").modal("hide");
     $("#active-bets").show();
     var currentBet = new Bet()
   });

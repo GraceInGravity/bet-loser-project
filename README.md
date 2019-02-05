@@ -40,12 +40,14 @@ User can identify loser of bet | |
 Bet loser can provide proof of fulfilling bet penalty | |
 System will mark bet as resolved when proof is received | |
 System will increase degree of penalty when time limit has been exceeded without proof of fulfillment | |
+New bet will be added at the top of current bets | |
 
 
 ### Stretch Goals
 
 * System generates and sends emails to entered addresses, inviting people to participate in bet
 * Potential participants can accept invitations to participate in the bet
+* Sorting
 
 
 ## Setup/Installation Requirements
