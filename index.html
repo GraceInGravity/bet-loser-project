@@ -6,6 +6,7 @@
     <link rel="stylesheet" href="css/bootstrap.css">
     <link rel="stylesheet" href="css/styles.css">
     <script type="text/javascript" src="js/jquery-3.3.1.js"></script>
+    <script type="text/javascript" src="js/bootstrap.js"></script>
     <script type="text/javascript" src="js/scripts.js"></script>
   </head>
   <body>
@@ -22,13 +23,27 @@
         <input type="text" name="user2" value="">
         <label for="email2">Email2</label>
         <input type="email" name="email2" value="">
+        <select>
+          <option name="money" value="money">Money</option>
+        </select>
+        <label for="amount">Amount of your bet</label>
+        <input type="number" name="amount" id="amount" value="">
         <label for="bet-notes">Bet Notes</label>
         <textarea name="bet-notes" rows="4" cols="40"></textarea>
         <button type="submit" name="submit">Submit</button>
       </form>
 
-      <div class="bets">
+      <ul id="active-bets" class="row">
+      </ul>
+      <!-- <button id='addBet'>Add a new bet</button> -->
 
+      <div class="results-display">
+        <h3>Choose a Winner</h3>
+        <label for="user1"></label>
+        <input type="radio" id='user1' name="winner" value="1">
+        <label for="user2"></label>
+        <input type="radio" id='user2' name="winner" value="2">
+        <button type="button" class="complete" name="win-btn">Submit Winner</button>
       </div>
 
     </div>

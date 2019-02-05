@@ -1,8 +1,20 @@
-input {
+
+
+input, select {
   display:block;
   margin-bottom: 10px;
 }
 
-button {
-  display: block;
+
+
+ul {
+  padding : 0;
+  text-align: center;
+  margin: auto;
+  /*background-color: skyblue;*/
+  display: none;
+}
+
+li {
+  list-style-type: none;
 }
