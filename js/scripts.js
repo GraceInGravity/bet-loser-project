@@ -83,7 +83,7 @@ Bet.prototype.assignId = function(user) {
 
 Bet.prototype.getDisplayHTML = function () {
   var html  = '\
-  <li class="col-md-4 card"> \
+  <li class="col-md-4 card" id="' + this.currentId + '"> \
     <button class="card-header" type="button" data-toggle="collapse" data-target="#bet-details" aria-expanded="false" aria-controls="collapseExample">' + this.betName + '</button> \
     <div class="collapse" id="bet-details"> \
       <div class="card-body"> \
@@ -94,7 +94,7 @@ Bet.prototype.getDisplayHTML = function () {
         <p class="card-text">' + this.betPenalty.penaltyCategory + '</p> \
         <p class="card-text">' + this.betPenalty.penaltyAmount + '</p> \
       </div> \
-    <button type="button" class="complete" name="win-btn">select winner</button></div> \
+    <button type="button" class="complete" id="win-btn' + this.currentId + '" name="win-btn">select winner</button></div> \
   </li>'
 
   return html;
@@ -164,13 +164,19 @@ $(function(){
 
   // working with #win-chooser button
   $("#win-chooser").click(function(){
+    $(".results-display").hide();
     var winner = $("input:radio[name='winner']:checked").val();
-    var user1 = betBook.bets[0].betUsers[0].userName
-    var user2 = betBook.bets[0].betUsers[1].userName
+    var user1 = betBook.bets[0].betUsers[0].userName;
+    var user2 = betBook.bets[0].betUsers[1].userName;
+    var amount = betBook.bets[0].betPenalty.penaltyAmount;
+    var time = betBook.bets[0].betPenalty.penaltyTimeLimit;
     if (winner == 1) {
-      $(".resolution").text(user1 + " is the winner!");
+      $("li#2").append(user1 + " is the winner! <br>" + "You have " + time + " days to pay " + user2 + " $" + amount );
+      $("#win-btn2").hide();
+      console.log(time);
     } else if (winner ==2) {
-      $(".resolution").text(user2+ " is the winner!");
+      $("li#2").append(user2+ " is the winner! <br>" + "You have " + time + " days to pay " + user2 + " $" + amount);
+      $("win-btn2").hide();
     }
 
   })
