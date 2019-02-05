@@ -10,32 +10,55 @@
     <script type="text/javascript" src="js/scripts.js"></script>
   </head>
   <body>
+    <div class="modal" id="exampleModal" tabindex="-1" role="dialog">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">Add Your Bet</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <form id="bet-form">
+              <label for="bet-name">Bet Name</label>
+              <input type="text" name="bet-name" value="Bet Name">
+              <label for="user1">User1</label>
+              <input type="text" name="user1" value="Ward">
+              <label for="email1">Email1</label>
+              <input type="email" name="email1" value="Ward@ward.com">
+              <label for="user2">User2</label>
+              <input type="text" name="user2" value="Tracy">
+              <label for="email2">Email2</label>
+              <input type="email" name="email2" value="Tracy@tracy.com">
+              <select>
+                <option name="money" value="money">Money</option>
+              </select>
+              <label for="amount">Amount of your bet</label>
+              <input type="number" name="amount" id="amount" value="100">
+              <label for="bet-notes">Bet Notes</label>
+              <textarea name="bet-notes" rows="4" cols="40">Your bet desciption goes here</textarea>
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Forget It</button>
+              <button type="submit" class="btn btn-success" name="submit">Add Bet</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
     <div class="container">
       <h1>Bet Loser</h1>
+      <h5>Don't be a loser!</h5>
 
-      <form id="bet-form">
-        <label for="bet-name">Bet Name</label>
-        <input type="text" name="bet-name" value="Bet Name">
-        <label for="user1">User1</label>
-        <input type="text" name="user1" value="Ward">
-        <label for="email1">Email1</label>
-        <input type="email" name="email1" value="Ward@ward.com">
-        <label for="user2">User2</label>
-        <input type="text" name="user2" value="Tracy">
-        <label for="email2">Email2</label>
-        <input type="email" name="email2" value="Tracy@tracy.com">
-        <select>
-          <option name="money" value="money">Money</option>
-        </select>
-        <label for="amount">Amount of your bet</label>
-        <input type="number" name="amount" id="amount" value="100">
-        <label for="bet-notes">Bet Notes</label>
-        <textarea name="bet-notes" rows="4" cols="40">Your bet desciption goes here</textarea>
-        <button type="submit" name="submit">Submit</button>
-      </form>
+      <div class="bet-container">
+        <div>
+          <a href="#"><img src="imgs/add-icon.png"  data-toggle="modal" data-target="#exampleModal"></a>
+          <h2>Your active bets</h2>
+        </div>
+        <ul id="active-bets" class="row">
+        </ul>
+      </div>
 
-      <ul id="active-bets" class="row">
-      </ul>
+
       <!-- <button id='addBet'>Add a new bet</button> -->
 
       <form class="results-display">

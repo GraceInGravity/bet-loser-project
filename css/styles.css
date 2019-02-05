@@ -7,12 +7,14 @@ ul {
   padding : 0;
   text-align: center;
   margin: auto;
-  /*background-color: skyblue;*/
-  display: none;
 }
 
 li {
   list-style-type: none;
+}
+
+h5 {
+  margin-bottom: 30px;
 }
 
 .results-display {
@@ -25,4 +27,23 @@ li {
 
 .card-header {
   width: 100%;
+}
+
+/* #bet-form {
+  display: none;
+} */
+
+.bet-container {
+  text-align: center;
+}
+
+.bet-container h2 {
+  border-bottom: 3px solid black;
+}
+
+img[src="imgs/add-icon.png"] {
+  float: right;
+  width: 60px;
+  position: relative;
+  top: -35px;
 }
