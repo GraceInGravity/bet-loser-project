@@ -10,7 +10,7 @@
     <script type="text/javascript" src="js/scripts.js"></script>
   </head>
   <body>
-    <div class="modal" id="exampleModal" tabindex="-1" role="dialog">
+    <div class="modal" id="addBetModal" tabindex="-1" role="dialog">
       <div class="modal-dialog" role="document">
         <div class="modal-content">
           <div class="modal-header">
@@ -51,29 +51,36 @@
 
       <div class="bet-container">
         <div>
-          <a href="#"><img src="imgs/add-icon.png"  data-toggle="modal" data-target="#exampleModal"></a>
+          <a href="#"><img src="imgs/add-icon.png"  data-toggle="modal" data-target="#addBetModal"></a>
           <h2>Your active bets</h2>
         </div>
         <ul id="active-bets" class="row">
-        </ul>
-        <h2>Your Completed Bets</h2>
-        <ul id="completed-bets">
-
         </ul>
       </div>
 
 
       <!-- <button id='addBet'>Add a new bet</button> -->
-
-      <form class="results-display">
-        <h3>Choose a Winner</h3>
-        <label for="user1"></label>
-        <input type="radio" id='user1' name="winner" value="1">
-        <label for="user2"></label>
-        <input type="radio" id='user2' name="winner" value="2">
-        <button type="button" id="win-chooser" name="button">Declare Winner</button>
-      </form>
-
+      <div class="modal" id="declareWinnerModal" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title">Choose a Winner for <span class="active-bet-name"></span></h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <form class="results-display">
+                <label for="user1"></label>
+                <input type="radio" id='user1' name="winner" value="1">
+                <label for="user2"></label>
+                <input type="radio" id='user2' name="winner" value="2">
+                <button type="button" id="win-chooser" name="button"  data-dismiss="modal">Declare Winner</button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
       <!-- to show after button#win-chooser is clicked -->
       <div class="resolution">
 
