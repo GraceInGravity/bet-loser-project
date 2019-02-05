@@ -45,7 +45,7 @@ Bet.prototype.getDisplayHTML = function () {
         <p class="card-text">' + this.betPenalty.penaltyCategory + '</p> \
         <p class="card-text">' + this.betPenalty.penaltyAmount + '</p> \
       </div> \
-    <button type="button" class="complete" id="win-btn' + this.id + '" name="win-btn">select winner</button></div> \
+    <button type="button" class="complete" id="win-btn' + this.id + '" name="win-btn" data-toggle="modal" data-target="#declareWinnerModal">Select Winner</button></div> \
   </li>'
 
   return html;
@@ -146,7 +146,7 @@ $(function(){
     $("#active-bets").append(newBet.getDisplayHTML());
 
 
-    $("#exampleModal").modal("hide");
+    $("#addBetModal").modal("hide");
     $("#active-bets").show();
     var currentBet = new Bet()
   });
@@ -160,7 +160,9 @@ $(function(){
     $(".results-display").show();
     $("label[for='user1']").text(betBook.bets[0].betUsers[0].userName);
     $("label[for='user2']").text(betBook.bets[0].betUsers[1].userName);
+    $(".active-bet-name").text(betBook.bets[0].betName);
   });
+
 
   $("#bet-details button").click()
 
@@ -180,6 +182,7 @@ $(function(){
       $("li#1 .card-body").append(user2+ " is the winner! <br>" + "You have " + time + " days to pay " + user2 + " $" + amount);
       $("#1 button:last-child").hide();
     }
+
 
   })
 });
