@@ -160,7 +160,9 @@ $(function(){
     $(".results-display").show();
     $("label[for='user1']").text(betBook.bets[0].betUsers[0].userName);
     $("label[for='user2']").text(betBook.bets[0].betUsers[1].userName);
+    $(".active-bet-name").text(betBook.bets[0].betName);
   });
+
 
   $("#bet-details button").click()
 
@@ -180,6 +182,7 @@ $(function(){
       $("li#2").append(user2+ " is the winner! <br>" + "You have " + time + " days to pay " + user2 + " $" + amount);
       $("win-btn2").hide();
     }
+
 
   })
 });
