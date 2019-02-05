@@ -21,6 +21,7 @@ function Bet(betName, betTerms, betPenalty) {
   this.currentId = 0;
 }
 
+
 function Penalty(penaltyCategory, penaltyTimeLimit, penaltyAmount) {
   this.penaltyCategory = penaltyCategory;
   this.penaltyTimeLimit = penaltyTimeLimit;
@@ -160,4 +161,17 @@ $(function(){
   });
 
   $("#bet-details button").click()
+
+  // working with #win-chooser button
+  $("#win-chooser").click(function(){
+    var winner = $("input:radio[name='winner']:checked").val();
+    var user1 = betBook.bets[0].betUsers[0].userName
+    var user2 = betBook.bets[0].betUsers[1].userName
+    if (winner == 1) {
+      $(".resolution").text(user1 + " is the winner!");
+    } else if (winner ==2) {
+      $(".resolution").text(user2+ " is the winner!");
+    }
+
+  })
 });
