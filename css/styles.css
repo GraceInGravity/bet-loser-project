@@ -94,8 +94,9 @@ img[src="imgs/add-icon.png"] {
   top: -38px; */
 }
 
-.button-row {
-  text-align: center;
+div.button-row > * {
+  width: 180px;
+  margin: 0 auto 0 auto;
 }
 
 .bet-user-container {
@@ -105,4 +106,8 @@ img[src="imgs/add-icon.png"] {
 .bet-user-container img {
   width: 50px;
   border-radius: 50%;
+}
+
+.bet-descrip {
+  font-size: 1.25rem;
 }

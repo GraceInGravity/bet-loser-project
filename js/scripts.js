@@ -39,19 +39,18 @@ Bet.prototype.getDisplayHTML = function () {
     <button class="card-header" type="button" data-toggle="collapse" data-target="#details'+ this.id + '" aria-expanded="false" aria-controls="collapseExample">' + this.betName + '</button> \
     <div class="collapse" id="details' + this.id + '"> \
       <div class="card-body"> \
-        <p class="card-text">' + this.betTerms + '</p> \
-        <h6 class="card-title">Participants</h6>'
+        <p class="card-text bet-descrip">' + this.betTerms + '</p> '
 
         for(var i = 0; i < this.betUsers.length; i++) {
           html += this.betUsers[i].getUserDisplayHTML();
         }
 
-        html += '<h6 class="card-title">Stakes</h6> \
-        <p class="card-text">' + this.betPenalty.penaltyCategory + '</p> \
-        <p class="card-text">' + this.betPenalty.penaltyAmount + '</p> \
-        <p class="card-text">' + this.betPenalty.penaltyDue + '</p> \
+        html += '<h5 class="card-title">What\'s at Stake</h5> \
+        <p class="card-text"><strong>Amount:</strong> '  + this.betPenalty.penaltyAmount + '</p> \
+        <p class="card-text"><strong>Category:</strong> ' + this.betPenalty.penaltyCategory + '</p> \
+        <p class="card-text"><strong>Paid By:</strong> ' + this.betPenalty.penaltyDue + '</p> \
       </div> \
-    <div class="button-row"><button type="button" class="complete btn btn-info" id="' + this.id + '" name="win-btn" data-toggle="modal" data-target="#declareWinnerModal">Select Winner</button></div></div> \
+    <div class="button-row text-center"><button type="button" class="complete btn btn-info" id="' + this.id + '" name="win-btn" data-toggle="modal" data-target="#declareWinnerModal">Select Winner</button></div></div> \
   </li>'
 
   return html;
@@ -110,7 +109,7 @@ Bet.prototype.getCharityHTML  = function() {
   var charityEmail = ["darcie@habitatportlandmetro.org", "contact.us@ppfa.org", "info@naeh.org", "info@mealsonwheelsamerica.org" ]
   var charityWebsite = ["habitat.org", "plannedparenthood.org", "endhomelessness.org", "mealsonwheelsamerica.org" ]
   var randomIndex = Math.floor((Math.random() * charityName.length));
-  return "<p>You owe " + this.betPenalty.penaltyAmount + " dollars to " + charityName[randomIndex] + ". You can reach them by email at <a href='mailto:" + charityEmail[randomIndex] + "?subject=I Lost A Bet'>" + charityEmail[randomIndex] + "</a>, or you can visit their website at <a href='https://www." + charityWebsite[randomIndex] + "'>" +  charityWebsite[randomIndex] + "</a>. Please donate by " + this.betPenalty.penaltyDue + ".</p>";
+  return "<p>" + this.betLoser.userName + " owes " + this.betPenalty.penaltyAmount + " dollars to " + charityName[randomIndex] + ". Reach them by email at <a href='mailto:" + charityEmail[randomIndex] + "?subject=I Lost A Bet'>" + charityEmail[randomIndex] + "</a>, or visit their website at <a rel='external' href='https://www." + charityWebsite[randomIndex] + "'>" +  charityWebsite[randomIndex] + "</a>. Please donate by " + this.betPenalty.penaltyDue + ".</p>";
 }
 
 // Penalty.prototype.cashBet = function(penaltyAmount, userName, whichCharity){
@@ -149,6 +148,7 @@ Penalty.prototype.prankBet = function(prankLevel){
 
   return "You must" + prankList[prankLevel];
 }
+
 
 $(function(){
   var betBook = new BetBook();
