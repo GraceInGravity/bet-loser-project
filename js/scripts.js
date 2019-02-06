@@ -86,7 +86,6 @@ Bet.prototype.showPenalty = function(){
   if(penaltyCategory === 'donation') {
     console.log("showing donation penalty field");
     this.showDonationPenalty();
-
   } else if(penaltyCategory === 'volunteer') {
     console.log("showing volunteer penalty");
     this.showVolunteerPenalty();
@@ -95,8 +94,9 @@ Bet.prototype.showPenalty = function(){
   } else if(penaltyCategory === 'chores'){
     this.showChoresPenalty();
   } else if(penaltyCategory === 'prank'){
-    this.showPrankPenalty();
+    this.showPranksPenalty();
   } else {console.log("Problem with penaltyCategory choice")}
+  $("#list-item-" + this.id).prependTo("#completed-bets");
 }
 
 Bet.prototype.assignWinner = function() {
@@ -125,7 +125,6 @@ Bet.prototype.showDonationPenalty = function() {
   var charityObject = this.getCharityInfo();
   $("#list-item-" + this.id + " .card-body").append(this.getDonationHTML(charityObject));
   $("#list-item-" + this.id + " button:last-child").hide();
-  $("#list-item-" + this.id).prependTo("#completed-bets");
 }
 
 Bet.prototype.getDonationHTML = function(charityObject) {
@@ -137,42 +136,39 @@ Bet.prototype.showVolunteerPenalty = function() {
   var charityObject = this.getCharityInfo();
   $("#list-item-" + this.id + " .card-body").append(this.getVolunteerHTML(charityObject));
   $("#list-item-" + this.id + " button:last-child").hide();
-  $("#list-item-" + this.id).prependTo("#completed-bets");
 }
 
 Bet.prototype.getVolunteerHTML = function(charityObject) {
-  return "<p>You owe " + this.betPenalty.penaltyAmount + " hours to " + charityObject.name + ". You can reach them by email at <a href='mailto:" + charityObject.email + "?subject=I Lost A Bet'>" + charityObject.email + "</a>, or you can visit their website at <a href='https://www." + charityObject.website + "'>" +  charityObject.website + "</a>. Please donate by " + this.betPenalty.penaltyDue + ".</p>";
+  return "<p>" + this.betLoser.userName + " owes " + this.betPenalty.penaltyAmount + " hour(s) to " + charityObject.name + ". You can reach them by email at <a href='mailto:" + charityObject.email + "?subject=I Lost A Bet'>" + charityObject.email + "</a>, or you can visit their website at <a href='https://www." + charityObject.website + "'>" +  charityObject.website + "</a>. Please donate by " + this.betPenalty.penaltyDue + ".</p>";
 }
 
+Bet.prototype.addAdditionalS = function() {
+  if(this.betPenalty.penaltyAmount == 1) {
+    return "";
+  } else {return "s"};
+}
 
 // Change to volunteer
 Bet.prototype.showMoneyPenalty = function() {
   $("#list-item-" + this.id + " .card-body").append("<p>" + this.betLoser.userName + " is the loser! <br>" + this.betLoser.userName + " has until " + this.betPenalty.penaltyDue + " to pay " + this.betWinner.userName + " $" + this.betPenalty.penaltyAmount + ".</p>");
   $("#list-item-" + this.id + " button:last-child").hide();
-  $("#list-item-" + this.id).appendTo("#completed-bets");
 }
 
 Bet.prototype.showChoresPenalty = function(){
   var choreChoice = ["laundry", "child or pet sitting", "house cleaning", "car washing", "volunteer at charity of winner's choice", "jog to do my errands"];
   var randomIndex = Math.floor((Math.random() * choreChoice.length));
 
-  $("#list-item-" + this.id + " .card-body").append("<p>" + this.betLoser.userName + " is the loser! <br>" + this.betLoser.userName + " has until " + this.betPenalty.penaltyDue + " to work doing " + choreChoice[randomIndex] + " for " + this.betPenalty.penaltyAmount + " hours of hard labor for " + this.betWinner.userName + ".</p>");
+  $("#list-item-" + this.id + " .card-body").append("<p>" + this.betLoser.userName + " is the loser! <br>" + this.betLoser.userName + " has until " + this.betPenalty.penaltyDue + " to work doing " + choreChoice[randomIndex] + " for " + this.betPenalty.penaltyAmount + " hour" + this.addAdditionalS() + " of hard labor for " + this.betWinner.userName + ".</p>");
   $("#list-item-" + this.id + " button:last-child").hide();
-  $("#list-item-" + this.id).appendTo("#completed-bets");
-
   // return "You owe" + timeLevel + "hours doing " + timeChoice[penaltyChoice] + "for the winner";
   // Replace for the winner with winner name
 }
 
 Bet.prototype.showPranksPenalty = function(){
-
   var prankList = ["sing in public 'Do You Want To Build a Snowman'", "deliver flowers to your crush",  " get at least $20 from strangers", "Jump into the Willamette river", " do the naked bike ride but not actually during the Naked Bike Ride", "wear a Make America Great Again hat to People's Co-op"];
   var randomIndex = Math.floor((Math.random() * prankList.length));
   $("#list-item-" + this.id + " .card-body").append("<p>" + this.betLoser.userName + " is the loser! <br>" + this.betLoser.userName + " has until " + this.betPenalty.penaltyDue + " to do the prank: " + prankList[randomIndex] + " for " + this.betPenalty.penaltyAmount + " hours for " + this.betWinner.userName + ".</p>");
   $("#list-item-" + this.id + " button:last-child").hide();
-  $("#list-item-" + this.id).appendTo("#completed-bets");
-
-  // return "You must" + prankList[prankLevel];
 }
 // Penalty.prototype.cashBet = function(penaltyAmount, userName, whichCharity){
 //
@@ -250,12 +246,12 @@ $(function(){
   });
 
   $("#active-bets").on("click", ".complete", function(){
+    tempBetId = $(this).attr('id');
     $(".results-display").show();
-    $("label[for='bet-user1']").text(betBook.bets[0].betUsers[0].userName);
-    $("label[for='bet-user2']").text(betBook.bets[0].betUsers[1].userName);
+    $("label[for='bet-user1']").text(betBook.bets[tempBetId].betUsers[0].userName);
+    $("label[for='bet-user2']").text(betBook.bets[tempBetId].betUsers[1].userName);
     $(".active-bet-name").text(betBook.bets[0].betName);
 
-    tempBetId = $(this).attr('id');
   });
 
   $("#modal-winner-submit").click(function(){

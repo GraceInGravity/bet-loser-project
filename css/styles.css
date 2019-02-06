@@ -50,6 +50,10 @@ li {
   width: 100%;
 }
 
+li .card-header:hover {
+  cursor: pointer;
+}
+
 h6.card-title {
   margin-bottom: 0px;
 }
