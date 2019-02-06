@@ -101,7 +101,7 @@ Bet.prototype.getCharityHTML  = function() {
   var charityEmail = ["darcie@habitatportlandmetro.org", "contact.us@ppfa.org", "info@naeh.org", "info@mealsonwheelsamerica.org" ]
   var charityWebsite = ["habitat.org", "plannedparenthood.org", "endhomelessness.org", "mealsonwheelsamerica.org" ]
   var randomIndex = Math.floor((Math.random() * charityName.length));
-  return "<p>You owe " + this.betPenalty.penaltyAmount + " dollars to " + charityName[randomIndex] + ". You can reach them by email at " + charityEmail[randomIndex] + ", or you can visit their website at " + charityWebsite[randomIndex] + ". Please donate by " + this.betPenalty.penaltyDue + ".</p>";
+  return "<p>You owe " + this.betPenalty.penaltyAmount + " dollars to " + charityName[randomIndex] + ". You can reach them by email at " + charityEmail[randomIndex] + ", or you can visit their website at <a href='https://www." + charityWebsite[randomIndex] + "'>" +  charityWebsite[randomIndex] + "</a>. Please donate by " + this.betPenalty.penaltyDue + ".</p>";
 }
 
 
