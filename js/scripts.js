@@ -36,24 +36,24 @@ Bet.prototype.assignId = function(user) {
 Bet.prototype.getDisplayHTML = function () {
   var html  = '\
   <li class="card" id="list-item-' + this.id + '"> \
-    <button class="card-header" type="button" data-toggle="collapse" data-target="#details'+ this.id + '" aria-expanded="false" aria-controls="collapseExample">' + this.betName + ' bet#' + this.id + '</button> \
-    <div class="collapse" id="details' + this.id + '"> \
-      <div class="card-body"> \
-        <p class="card-text bet-descrip">' + this.betTerms + '</p> \
-        <div class="bet-user-container-row">'
+  <button class="card-header" type="button" data-toggle="collapse" data-target="#details'+ this.id + '" aria-expanded="false" aria-controls="collapseExample">' + this.betName + ' bet#' + this.id + '</button> \
+  <div class="collapse" id="details' + this.id + '"> \
+  <div class="card-body"> \
+  <p class="card-text bet-descrip">' + this.betTerms + '</p> \
+  <div class="bet-user-container-row">'
 
-        for(var i = 0; i < this.betUsers.length; i++) {
-          html += this.betUsers[i].getUserDisplayHTML();
-        }
+  for(var i = 0; i < this.betUsers.length; i++) {
+    html += this.betUsers[i].getUserDisplayHTML();
+  }
 
-        html += '</div> \
-        <h5 class="card-title">What\'s at Stake</h5> \
-        <p class="card-text"><strong>Amount:</strong> '  + this.betPenalty.penaltyAmount + '</p> \
-        <p class="card-text"><strong>Category:</strong> ' + this.betPenalty.penaltyCategory + '</p> \
-        <p class="card-text"><strong>Paid By:</strong> ' + this.betPenalty.penaltyDue + '</p> \
-      </div> \
-      <div class="button-row text-center"><button type="button" class="complete btn btn-info" id="' + this.id + '" name="win-btn" data-toggle="modal" data-target="#declareWinnerModal">Select Winner</button></div> \
-    </div> \
+  html += '</div> \
+  <h5 class="card-title">What\'s at Stake</h5> \
+  <p class="card-text"><strong>Amount:</strong> '  + this.betPenalty.penaltyAmount + '</p> \
+  <p class="card-text"><strong>Category:</strong> ' + this.betPenalty.penaltyCategory + '</p> \
+  <p class="card-text"><strong>Paid By:</strong> ' + this.betPenalty.penaltyDue + '</p> \
+  </div> \
+  <div class="button-row text-center"><button type="button" class="complete btn btn-info" id="' + this.id + '" name="win-btn" data-toggle="modal" data-target="#declareWinnerModal">Select Winner</button></div> \
+  </div> \
   </li>'
 
   return html;
@@ -67,7 +67,7 @@ function User(userName, userEmail, userBank) {
 }
 
 User.prototype.getUserDisplayHTML = function(){
-  var html = '<div class="bet-user-container"><img src="' + this.userImg + '"><p class="card-text">' + this.userName + '</p></div>'
+  var html = '<div class="bet-user-container"><img src="' + this.userImg + '"><p class="">' + this.userName + '</p></div>'
 
   return html;
 }
@@ -77,6 +77,11 @@ function Penalty(penaltyCategory, penaltyTimeLimit, penaltyAmount, penaltyDue) {
   this.penaltyTimeLimit = penaltyTimeLimit;
   this.penaltyAmount = penaltyAmount;
   this.penaltyDue = penaltyDue;
+}
+
+Bet.prototype.showWinWindow = function() {
+  $("label[for='bet-user1']").html(this.betUsers[0].getUserDisplayHTML());
+  $("label[for='bet-user2']").html(this.betUsers[1].getUserDisplayHTML());
 }
 
 // Decision of Penalty- add additional decisions
@@ -128,7 +133,7 @@ Bet.prototype.showDonationPenalty = function() {
 }
 
 Bet.prototype.getDonationHTML = function(charityObject) {
-  return "<p>You owe $" + this.betPenalty.penaltyAmount + " to " + charityObject.name + ". You can reach them by email at <a href='mailto:" + charityObject.email + "? subject=I Lost A Bet'>" + charityObject.email + "</a>, or  you can visit their website at <a href='https://www." + charityObject.website + "'>" +  charityObject.website +    "</a>. Please donate by " + this.betPenalty.penaltyDue + ".</p>";
+  return "<p>" + this.betLoser.userName + " owes $" + this.betPenalty.penaltyAmount + " to " + charityObject.name + ". You can reach them by email at <a href='mailto:" + charityObject.email + "? subject=I Lost A Bet'>" + charityObject.email + "</a>, or  you can visit their website at <a href='https://www." + charityObject.website + "'>" +  charityObject.website +    "</a>. Please donate by " + this.betPenalty.penaltyDue + ".</p>";
 }
 
 //volunteer results
@@ -139,7 +144,7 @@ Bet.prototype.showVolunteerPenalty = function() {
 }
 
 Bet.prototype.getVolunteerHTML = function(charityObject) {
-  return "<p>" + this.betLoser.userName + " owes " + this.betPenalty.penaltyAmount + " hour(s) to " + charityObject.name + ". You can reach them by email at <a href='mailto:" + charityObject.email + "?subject=I Lost A Bet'>" + charityObject.email + "</a>, or you can visit their website at <a href='https://www." + charityObject.website + "'>" +  charityObject.website + "</a>. Please donate by " + this.betPenalty.penaltyDue + ".</p>";
+  return "<p>" + this.betLoser.userName + " owes " + this.betPenalty.penaltyAmount + " volunteer hour" + this.addAdditionalS() + " to " + charityObject.name + ". You can reach them by email at <a href='mailto:" + charityObject.email + "?subject=I Lost A Bet'>" + charityObject.email + "</a>, or you can visit their website at <a href='https://www." + charityObject.website + "'>" +  charityObject.website + "</a>. Please donate by " + this.betPenalty.penaltyDue + ".</p>";
 }
 
 Bet.prototype.addAdditionalS = function() {
@@ -217,14 +222,14 @@ $(function(){
     // var betDue = new Date()
     var betDue = moment(betDueInput).format('MMMM D, YYYY'); // ** Convert date input 2019-04-12 format to April 12th, 2019 ** //
 
-      // Parameter is zero waiting for bank account field
+    // Parameter is zero waiting for bank account field
     var user1 = new User(betUser1, betUser1Email, 0);
     var user2 = new User(betUser2, betUser2Email, 0);
 
-      // Parameters are (category, duration, betamount, due date)
+    // Parameters are (category, duration, betamount, due date)
     var betPenalty = new Penalty(betCategory, 0, betAmount, betDue);
     console.log(betPenalty);
-      // Parameters are (betname, betnotes, betpenalty)
+    // Parameters are (betname, betnotes, betpenalty)
     var newBet = new Bet(betName, betNotes, betPenalty);
     console.log(betPenalty);
     newBet.addUser(user1);
@@ -248,10 +253,7 @@ $(function(){
   $("#active-bets").on("click", ".complete", function(){
     tempBetId = $(this).attr('id');
     $(".results-display").show();
-    $("label[for='bet-user1']").text(betBook.bets[tempBetId].betUsers[0].userName);
-    $("label[for='bet-user2']").text(betBook.bets[tempBetId].betUsers[1].userName);
-    $(".active-bet-name").text(betBook.bets[0].betName);
-
+    betBook.bets[tempBetId].showWinWindow();
   });
 
   $("#modal-winner-submit").click(function(){

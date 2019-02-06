@@ -109,6 +109,18 @@ img[src="imgs/add-icon.png"] {
   margin-bottom: 20px;
 }
 
+input[name="winner"] {
+  display:none;
+}
+
+input[name="winner"]:checked + label {
+  color: red;
+}
+
+input[name="winner"] + label:hover {
+  background-color: blue;
+}
+
 .bet-user-container-row {
   display: flex;
   flex-flow: row wrap;
