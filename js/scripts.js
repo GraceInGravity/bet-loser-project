@@ -19,6 +19,7 @@ function Bet(betName, betTerms, betPenalty) {
   this.betTerms = betTerms;
   this.betPenalty = betPenalty;
   this.betLoser = "";
+  this.betWinner = "";
   this.currentUserIndex = 0;
 }
 
@@ -34,7 +35,7 @@ Bet.prototype.assignId = function(user) {
 
 Bet.prototype.getDisplayHTML = function () {
   var html  = '\
-  <li class="col-md-4 card" id="list-item-' + this.id + '"> \
+  <li class="card" id="list-item-' + this.id + '"> \
     <button class="card-header" type="button" data-toggle="collapse" data-target="#details'+ this.id + '" aria-expanded="false" aria-controls="collapseExample">' + this.betName + '</button> \
     <div class="collapse" id="details' + this.id + '"> \
       <div class="card-body"> \
@@ -65,28 +66,42 @@ function Penalty(penaltyCategory, penaltyTimeLimit, penaltyAmount) {
 
 Bet.prototype.showPenalty = function(){
   if(this.betPenalty.penaltyCategory === 'money') {
-    this.showMoneyPenalty(this.penaltyAmount);
-  } else if(this.penaltyCategory === 'charity') {
-    this.getCharityPenalty();
+    this.showMoneyPenalty();
+  } else if(this.betPenalty.penaltyCategory === 'charity') {
+    console.log("going to show charity")
+    this.showCharityPenalty();
   }
 }
 
 Bet.prototype.showMoneyPenalty = function() {
-  var winner = $("input:radio[name='winner']:checked").val();
-  var user1 = this.betUsers[0].userName;
-  var user2 = this.betUsers[1].userName;
-  var amount = this.betPenalty.penaltyAmount;
-  var time = this.betPenalty.penaltyTimeLimit;
-
-  if (winner == 1) {
-    $("#list-item-" + this.id + " .card-body").append(user1 + " is the winner! <br>" + "You have " + time + " days to pay " + user2 + " $" + amount );
-    $("#list-item-" + this.id + " button:last-child").hide();
-    console.log(time);
-  } else if (winner ==2) {
-    $("li#list-item-" + this.id + " .card-body").append(user2+ " is the winner! <br>" + "You have " + time + " days to pay " + user2 + " $" + amount);
-    $("#list-item-" + this.id + " button:last-child").hide();
-  }
+  this.assignWinner();
+  $("#list-item-" + this.id + " .card-body").append(this.betLoser.userName + " is the Loser! <br>" + "You have " + this.betPenalty.penaltyTimeLimit + " days to pay " + this.betWinner.userName + " $" + this.betPenalty.penaltyAmount);
+  $("#list-item-" + this.id + " button:last-child").hide();
+  $("#list-item-" + this.id).appendTo("#completed-bets");
 }
+
+Bet.prototype.assignWinner = function() {
+  var winner = $("input:radio[name='winner']:checked").val();
+  this.betWinner = this.betUsers[winner];
+  var loser = $("input:radio[name='winner']:not(:checked)").val();
+  this.betLoser = this.betUsers[loser];
+}
+
+Bet.prototype.showCharityPenalty = function() {
+  this.assignWinner();
+  $("#list-item-" + this.id + " .card-body").append(this.getCharityHTML());
+  $("#list-item-" + this.id + " button:last-child").hide();
+  $("#list-item-" + this.id).appendTo("#completed-bets");
+}
+
+Bet.prototype.getCharityHTML  = function() {
+  var charityName = ["Habitat for Humanity", "Planned Parenthood", "Housing First", "Meals on Wheels" ]
+  var charityEmail = ["darcie@habitatportlandmetro.org", "contact.us@ppfa.org", "info@naeh.org", "info@mealsonwheelsamerica.org" ]
+  var charityWebsite = ["habitat.org", "plannedparenthood.org", "endhomelessness.org", "mealsonwheelsamerica.org" ]
+  var randomIndex = Math.floor((Math.random() * charityName.length));
+  return "<p>You owe " + this.betPenalty.penaltyAmount + " dollars to " + charityName[randomIndex] + ". You can reach them by email at " + charityEmail[randomIndex] + ", or you can visit their website at " + charityWebsite[randomIndex] + "</p>";
+}
+
 
 Penalty.prototype.cashBet = function(penaltyAmount, userName, whichCharity){
 
@@ -138,17 +153,15 @@ $(function(){
     var betUser1Email = $("input[name='email1']").val();
     var betUser2 = $("input[name='user2']").val();
     var betUser2Email = $("input[name='email2']").val();
-    var betCategory = $("option[name='money']").val();
+    var betCategory = $("select[name='bet-select'] option:selected").val();
     var betAmount = $("input[name='amount']").val();
     var betNotes = $("textarea[name='bet-notes']").val();
     var betPenalty = "Bet Penalty Goes Here";
-
     var user1 = new User(betUser1, betUser1Email, 0);
     var user2 = new User(betUser2, betUser2Email, 0);
     var betPenalty = new Penalty(betCategory, 0, betAmount);
-    console.log(betPenalty);
     var newBet = new Bet(betName, betNotes, betPenalty, false);
-
+    console.log(betPenalty);
     newBet.addUser(user1);
     newBet.addUser(user2);
 
@@ -169,15 +182,15 @@ $(function(){
 
   $("#active-bets").on("click", ".complete", function(){
     $(".results-display").show();
-    $("label[for='user1']").text(betBook.bets[0].betUsers[0].userName);
-    $("label[for='user2']").text(betBook.bets[0].betUsers[1].userName);
+    $("label[for='bet-user1']").text(betBook.bets[0].betUsers[0].userName);
+    $("label[for='bet-user2']").text(betBook.bets[0].betUsers[1].userName);
     $(".active-bet-name").text(betBook.bets[0].betName);
 
     tempBetId = $(this).attr('id');
   });
 
-  // working with #win-chooser button
   $("#modal-winner-submit").click(function(){
     betBook.bets[tempBetId].showPenalty();
   });
+
 });
