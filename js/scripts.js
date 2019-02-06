@@ -39,19 +39,21 @@ Bet.prototype.getDisplayHTML = function () {
     <button class="card-header" type="button" data-toggle="collapse" data-target="#details'+ this.id + '" aria-expanded="false" aria-controls="collapseExample">' + this.betName + ' bet#' + this.id + '</button> \
     <div class="collapse" id="details' + this.id + '"> \
       <div class="card-body"> \
-        <p class="card-text">' + this.betTerms + '</p> \
-        <h6 class="card-title">Participants</h6>'
+        <p class="card-text bet-descrip">' + this.betTerms + '</p> \
+        <div class="bet-user-container-row">'
 
         for(var i = 0; i < this.betUsers.length; i++) {
           html += this.betUsers[i].getUserDisplayHTML();
         }
 
-        html += '<h6 class="card-title">Stakes</h6> \
-        <p class="card-text">' + this.betPenalty.penaltyCategory + '</p> \
-        <p class="card-text">' + this.betPenalty.penaltyAmount + '</p> \
-        <p class="card-text">' + this.betPenalty.penaltyDue + '</p> \
+        html += '</div> \
+        <h5 class="card-title">What\'s at Stake</h5> \
+        <p class="card-text"><strong>Amount:</strong> '  + this.betPenalty.penaltyAmount + '</p> \
+        <p class="card-text"><strong>Category:</strong> ' + this.betPenalty.penaltyCategory + '</p> \
+        <p class="card-text"><strong>Paid By:</strong> ' + this.betPenalty.penaltyDue + '</p> \
       </div> \
-    <div class="button-row"><button type="button" class="complete btn btn-info" id="' + this.id + '" name="win-btn" data-toggle="modal" data-target="#declareWinnerModal">Select Winner</button></div></div> \
+      <div class="button-row text-center"><button type="button" class="complete btn btn-info" id="' + this.id + '" name="win-btn" data-toggle="modal" data-target="#declareWinnerModal">Select Winner</button></div> \
+    </div> \
   </li>'
 
   return html;
@@ -65,7 +67,8 @@ function User(userName, userEmail, userBank) {
 }
 
 User.prototype.getUserDisplayHTML = function(){
-  var html = '<div class="bet-user-container"><img src="' + this.userImg + '"><p class="card-text">' + this.userName + '</p>'
+  var html = '<div class="bet-user-container"><img src="' + this.userImg + '"><p class="card-text">' + this.userName + '</p></div>'
+
   return html;
 }
 
@@ -195,6 +198,7 @@ Bet.prototype.showPranksPenalty = function(){
 
 
 
+
 $(function(){
   var betBook = new BetBook();
   var tempBetId = 0;
@@ -209,11 +213,13 @@ $(function(){
     var betUser2Email = $("input[name='email2']").val();
     var betCategory = $("select[name='bet-select'] option:selected").val();
     var betAmount = $("input[name='amount']").val();
-    var betDue = $("input[name='duedate']").val();
+    var betDueInput = $("input[name='duedate']").val();
     var betNotes = $("textarea[name='bet-notes']").val();
     var betPenalty = "Bet Penalty Goes Here";
 
-    var betDueDays = Date.parse($("input[name='duedate']").val());
+    var betDueDays = Date.parse($("input[name='duedate']").val()); // ** In case we want to do math with the date **//
+    // var betDue = new Date()
+    var betDue = moment(betDueInput).format('MMMM D, YYYY'); // ** Convert date input 2019-04-12 format to April 12th, 2019 ** //
 
       // Parameter is zero waiting for bank account field
     var user1 = new User(betUser1, betUser1Email, 0);
