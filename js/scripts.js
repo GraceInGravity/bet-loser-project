@@ -40,9 +40,13 @@ Bet.prototype.getDisplayHTML = function () {
     <div class="collapse" id="details' + this.id + '"> \
       <div class="card-body"> \
         <p class="card-text">' + this.betTerms + '</p> \
-        <h6 class="card-title">Participants</h6> \
-        <p class="card-text"><span class="betUser>">' + this.betUsers[0].userName + '</span>, <span class="betUser">' + this.betUsers[1].userName + '</span></p> \
-        <h6 class="card-title">Stakes</h6> \
+        <h6 class="card-title">Participants</h6>'
+
+        for(var i = 0; i < this.betUsers.length; i++) {
+          html += this.betUsers[i].getUserDisplayHTML();
+        }
+
+        html += '<h6 class="card-title">Stakes</h6> \
         <p class="card-text">' + this.betPenalty.penaltyCategory + '</p> \
         <p class="card-text">' + this.betPenalty.penaltyAmount + '</p> \
         <p class="card-text">' + this.betPenalty.penaltyDue + '</p> \
@@ -57,6 +61,12 @@ function User(userName, userEmail, userBank) {
   this.userName = userName;
   this.userEmail = userEmail;
   this.userBank = userBank;
+  this.userImg = "imgs/generic-person.png";
+}
+
+User.prototype.getUserDisplayHTML = function(){
+  var html = '<div class="bet-user-container"><img src="' + this.userImg + '"><p class="card-text">' + this.userName + '<p>'
+  return html;
 }
 
 function Penalty(penaltyCategory, penaltyTimeLimit, penaltyAmount, penaltyDue) {
@@ -66,6 +76,7 @@ function Penalty(penaltyCategory, penaltyTimeLimit, penaltyAmount, penaltyDue) {
   this.penaltyDue = penaltyDue;
 }
 
+// Decision of Penalty
 Bet.prototype.showPenalty = function(){
   if(this.betPenalty.penaltyCategory === 'money') {
     this.showMoneyPenalty();
@@ -88,14 +99,12 @@ Bet.prototype.assignWinner = function() {
   var loser = $("input:radio[name='winner']:not(:checked)").val();
   this.betLoser = this.betUsers[loser];
 }
-
 Bet.prototype.showCharityPenalty = function() {
   this.assignWinner();
   $("#list-item-" + this.id + " .card-body").append(this.getCharityHTML());
   $("#list-item-" + this.id + " button:last-child").hide();
   $("#list-item-" + this.id).appendTo("#completed-bets");
 }
-
 Bet.prototype.getCharityHTML  = function() {
   var charityName = ["Habitat for Humanity", "Planned Parenthood", "Housing First", "Meals on Wheels" ]
   var charityEmail = ["darcie@habitatportlandmetro.org", "contact.us@ppfa.org", "info@naeh.org", "info@mealsonwheelsamerica.org" ]
@@ -105,27 +114,29 @@ Bet.prototype.getCharityHTML  = function() {
 }
 
 
-Penalty.prototype.cashBet = function(penaltyAmount, userName, whichCharity){
 
-  // + userName;
-  // How do we choose the other username??
 
-  // A   Enter Bet Amount into betPenalty
-  // C   Choose charity or random
-  //     Send out email with Amount and Charity
-  //     User message saying email was sent and open website
-  // T   Choose etsy, craigslist category etc
-  //     Send out email with Amount and Item and website
-
-  var charityName = ["Habitat for Humanity", "Planned Parenthood", "Housing First", "Meals on Wheels" ]
-  var charityEmail = ["darcie@habitatportlandmetro.org", "contact.us@ppfa.org", "info@naeh.org", "info@mealsonwheelsamerica.org" ]
-  var charityWebsite = ["habitat.org", "plannedparenthood.org", "endhomelessness.org", "mealsonwheelsamerica.org" ]
-  // Email donation letter to charityEmail[whichCharity];
-
-  return "You owe " + penaltyAmount + "dollars to " + charityName[whichCharity] + "the winner!";
-    // Button to continue
-    // Display/open charityWebsite[whichCharity;]
-}
+// Penalty.prototype.cashBet = function(penaltyAmount, userName, whichCharity){
+//
+//   // + userName;
+//   // How do we choose the other username??
+//
+//   // A   Enter Bet Amount into betPenalty
+//   // C   Choose charity or random
+//   //     Send out email with Amount and Charity
+//   //     User message saying email was sent and open website
+//   // T   Choose etsy, craigslist category etc
+//   //     Send out email with Amount and Item and website
+//
+//   var charityName = ["Habitat for Humanity", "Planned Parenthood", "Housing First", "Meals on Wheels" ]
+//   var charityEmail = ["darcie@habitatportlandmetro.org", "contact.us@ppfa.org", "info@naeh.org", "info@mealsonwheelsamerica.org" ]
+//   var charityWebsite = ["habitat.org", "plannedparenthood.org", "endhomelessness.org", "mealsonwheelsamerica.org" ]
+//   // Email donation letter to charityEmail[whichCharity];
+//
+//   return "You owe " + penaltyAmount + "dollars to " + charityName[whichCharity] + "the winner!";
+//     // Button to continue
+//     // Display/open charityWebsite[whichCharity;]
+// }
 
 
 Penalty.prototype.timeBet = function(penaltyChoice, timeLevel){
@@ -141,7 +152,6 @@ Penalty.prototype.prankBet = function(prankLevel){
 
   return "You must" + prankList[prankLevel];
 }
-
 
 $(function(){
   var betBook = new BetBook();
