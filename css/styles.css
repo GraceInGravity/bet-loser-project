@@ -97,3 +97,12 @@ img[src="imgs/add-icon.png"] {
 .button-row {
   text-align: center;
 }
+
+.bet-user-container {
+  float: left;
+}
+
+.bet-user-container img {
+  width: 50px;
+  border-radius: 50%;
+}
