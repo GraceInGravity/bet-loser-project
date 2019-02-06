@@ -94,19 +94,43 @@ img[src="imgs/add-icon.png"] {
   top: -38px; */
 }
 
-div.button-row > * {
-  width: 180px;
-  margin: 0 auto 0 auto;
+
+.card-body {
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: center;
 }
 
-.bet-user-container {
-  float: left;
+.card-body > * {
+  margin-bottom: 20px;
+}
+
+.bet-user-container-row {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: flex-start;
+}
+
+.bet-user-container{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-right: 20px;
+  text-align: center;
 }
 
 .bet-user-container img {
   width: 50px;
   border-radius: 50%;
+  display: block;
 }
+
+.button-row  {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: center;
+}
+
 
 .bet-descrip {
   font-size: 1.25rem;

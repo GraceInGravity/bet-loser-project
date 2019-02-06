@@ -39,18 +39,21 @@ Bet.prototype.getDisplayHTML = function () {
     <button class="card-header" type="button" data-toggle="collapse" data-target="#details'+ this.id + '" aria-expanded="false" aria-controls="collapseExample">' + this.betName + '</button> \
     <div class="collapse" id="details' + this.id + '"> \
       <div class="card-body"> \
-        <p class="card-text bet-descrip">' + this.betTerms + '</p> '
+        <p class="card-text bet-descrip">' + this.betTerms + '</p> \
+        <div class="bet-user-container-row">'
 
         for(var i = 0; i < this.betUsers.length; i++) {
           html += this.betUsers[i].getUserDisplayHTML();
         }
 
-        html += '<h5 class="card-title">What\'s at Stake</h5> \
+        html += '</div> \
+        <h5 class="card-title">What\'s at Stake</h5> \
         <p class="card-text"><strong>Amount:</strong> '  + this.betPenalty.penaltyAmount + '</p> \
         <p class="card-text"><strong>Category:</strong> ' + this.betPenalty.penaltyCategory + '</p> \
         <p class="card-text"><strong>Paid By:</strong> ' + this.betPenalty.penaltyDue + '</p> \
       </div> \
-    <div class="button-row text-center"><button type="button" class="complete btn btn-info" id="' + this.id + '" name="win-btn" data-toggle="modal" data-target="#declareWinnerModal">Select Winner</button></div></div> \
+      <div class="button-row text-center"><button type="button" class="complete btn btn-info" id="' + this.id + '" name="win-btn" data-toggle="modal" data-target="#declareWinnerModal">Select Winner</button></div> \
+    </div> \
   </li>'
 
   return html;
@@ -64,7 +67,7 @@ function User(userName, userEmail, userBank) {
 }
 
 User.prototype.getUserDisplayHTML = function(){
-  var html = '<div class="bet-user-container"><img src="' + this.userImg + '"><p class="card-text">' + this.userName + '<p>'
+  var html = '<div class="bet-user-container"><img src="' + this.userImg + '"><p class="card-text">' + this.userName + '</p></div>'
   return html;
 }
 
