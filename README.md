@@ -26,25 +26,25 @@ Bet loser can provide proof of fulfilling the penalty
 
 Specification | Input | Output
 ------------- | ----- | ------
-User can enter own name | |
-User can enter own email | |
-User can enter other participant name | |
-User can enter other participant email | |
-User can enter bet conditions | |
-User can enter bet time limit | |
-User can select penalty category | |
-User can enter quantity for penalty | |
+User can enter own name | Chris | "Chris"
+User can enter own email | chris@gmail.com | "chris@gmail.com"
+User can enter other participant name | Ward | "Ward"
+User can enter other participant email | ward@gmail.com | "ward@gmail.com"
+User can enter bet conditions | Patriots win Super Bowl | "Patriots win Super Bowl"
+User can enter bet time limit | Due 1 week after Super Bowl | 2/10/2019
+User can select penalty category | **Money**, Charity, Prank | Money
+User can enter quantity for penalty | 100 | 100
 System will save bet data | |
 System will display bet data in UI | |
-User can identify loser of bet | |
-Bet loser can provide proof of fulfilling bet penalty | |
-System will mark bet as resolved when proof is received | |
-System will increase degree of penalty when time limit has been exceeded without proof of fulfillment | |
-New bet will be added at the top of current bets | |
+User can identify loser of bet | Select Winner: Chris | Ward must pay Chris $100  
+System will mark bet as resolved when proof is received | Bet loser indicates payment has been made | Bet card moves to Completed section
+New bet will be added at the top of list of current bets | New bet created | Bet is at top of list
 
 
 ### Stretch Goals
 
+* System will increase degree of penalty when time limit has been exceeded without proof of fulfillment
+* Bet loser can provide proof of fulfilling bet penalty
 * System generates and sends emails to entered addresses, inviting people to participate in bet
 * Potential participants can accept invitations to participate in the bet
 * Sorting
