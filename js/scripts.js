@@ -45,6 +45,7 @@ Bet.prototype.getDisplayHTML = function () {
         <h5 class="card-title">Stakes</h5> \
         <p class="card-text">' + this.betPenalty.penaltyCategory + '</p> \
         <p class="card-text">' + this.betPenalty.penaltyAmount + '</p> \
+        <p class="card-text">' + this.betPenalty.penaltyDue + '</p> \
       </div> \
     <button type="button" class="complete" id="' + this.id + '" name="win-btn" data-toggle="modal" data-target="#declareWinnerModal">Select Winner</button></div> \
   </li>'
@@ -58,10 +59,11 @@ function User(userName, userEmail, userBank) {
   this.userBank = userBank;
 }
 
-function Penalty(penaltyCategory, penaltyTimeLimit, penaltyAmount) {
+function Penalty(penaltyCategory, penaltyTimeLimit, penaltyAmount, penaltyDue) {
   this.penaltyCategory = penaltyCategory;
   this.penaltyTimeLimit = penaltyTimeLimit;
   this.penaltyAmount = penaltyAmount;
+  this.penaltyDue = penaltyDue;
 }
 
 Bet.prototype.showPenalty = function(){
@@ -155,11 +157,16 @@ $(function(){
     var betUser2Email = $("input[name='email2']").val();
     var betCategory = $("select[name='bet-select'] option:selected").val();
     var betAmount = $("input[name='amount']").val();
+    var betDue = $("input[name='duedate']").val();
     var betNotes = $("textarea[name='bet-notes']").val();
     var betPenalty = "Bet Penalty Goes Here";
+
+    var betDueDays = Date.parse($("input[name='duedate']").val());
+
     var user1 = new User(betUser1, betUser1Email, 0);
     var user2 = new User(betUser2, betUser2Email, 0);
-    var betPenalty = new Penalty(betCategory, 0, betAmount);
+    var betPenalty = new Penalty(betCategory, 0, betAmount, betDue);
+    console.log(betPenalty);
     var newBet = new Bet(betName, betNotes, betPenalty, false);
     console.log(betPenalty);
     newBet.addUser(user1);
