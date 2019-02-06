@@ -164,11 +164,13 @@ $(function(){
     var betUser2Email = $("input[name='email2']").val();
     var betCategory = $("select[name='bet-select'] option:selected").val();
     var betAmount = $("input[name='amount']").val();
-    var betDue = $("input[name='duedate']").val();
+    var betDueInput = $("input[name='duedate']").val();
     var betNotes = $("textarea[name='bet-notes']").val();
     var betPenalty = "Bet Penalty Goes Here";
 
-    var betDueDays = Date.parse($("input[name='duedate']").val());
+    var betDueDays = Date.parse($("input[name='duedate']").val()); // ** In case we want to do math with the date **//
+    // var betDue = new Date()
+    var betDue = moment(betDueInput).format('MMMM D, YYYY'); // ** Convert date input 2019-04-12 format to April 12th, 2019 ** //
 
     var user1 = new User(betUser1, betUser1Email, 0);
     var user2 = new User(betUser2, betUser2Email, 0);
