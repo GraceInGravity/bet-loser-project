@@ -44,6 +44,7 @@ Bet.prototype.getDisplayHTML = function () {
         <h5 class="card-title">Stakes</h5> \
         <p class="card-text">' + this.betPenalty.penaltyCategory + '</p> \
         <p class="card-text">' + this.betPenalty.penaltyAmount + '</p> \
+        <p class="card-text">' + this.betPenalty.penaltyDue + '</p> \
       </div> \
     <button type="button" class="complete" id="' + this.id + '" name="win-btn" data-toggle="modal" data-target="#declareWinnerModal">Select Winner</button></div> \
   </li>'
@@ -57,10 +58,11 @@ function User(userName, userEmail, userBank) {
   this.userBank = userBank;
 }
 
-function Penalty(penaltyCategory, penaltyTimeLimit, penaltyAmount) {
+function Penalty(penaltyCategory, penaltyTimeLimit, penaltyAmount, penaltyDue) {
   this.penaltyCategory = penaltyCategory;
   this.penaltyTimeLimit = penaltyTimeLimit;
   this.penaltyAmount = penaltyAmount;
+  this.penaltyDue = penaltyDue;
 }
 
 Bet.prototype.showPenalty = function(){
@@ -77,13 +79,14 @@ Bet.prototype.showMoneyPenalty = function() {
   var user2 = this.betUsers[1].userName;
   var amount = this.betPenalty.penaltyAmount;
   var time = this.betPenalty.penaltyTimeLimit;
+  var dueDate = this.betPenalty.penaltyDue;
 
   if (winner == 1) {
-    $("#list-item-" + this.id + " .card-body").append(user1 + " is the winner! <br>" + "You have " + time + " days to pay " + user2 + " $" + amount );
+    $("#list-item-" + this.id + " .card-body").append(user1 + " is the winner! <br>" + "You need to pay " + "$" + amount + " to " + user2 + " by " + dueDate + ".");
     $("#list-item-" + this.id + " button:last-child").hide();
     console.log(time);
   } else if (winner ==2) {
-    $("li#list-item-" + this.id + " .card-body").append(user2+ " is the winner! <br>" + "You have " + time + " days to pay " + user2 + " $" + amount);
+    $("#list-item-" + this.id + " .card-body").append(user2 + " is the winner! <br>" + "You need to pay " + "$" + amount + " to " + user2 + " by " + dueDate + ".");
     $("#list-item-" + this.id + " button:last-child").hide();
   }
 }
@@ -140,12 +143,15 @@ $(function(){
     var betUser2Email = $("input[name='email2']").val();
     var betCategory = $("option[name='money']").val();
     var betAmount = $("input[name='amount']").val();
+    var betDue = $("input[name='duedate']").val();
     var betNotes = $("textarea[name='bet-notes']").val();
     var betPenalty = "Bet Penalty Goes Here";
 
+    var betDueDays = Date.parse($("input[name='duedate']").val());
+
     var user1 = new User(betUser1, betUser1Email, 0);
     var user2 = new User(betUser2, betUser2Email, 0);
-    var betPenalty = new Penalty(betCategory, 0, betAmount);
+    var betPenalty = new Penalty(betCategory, 0, betAmount, betDue);
     console.log(betPenalty);
     var newBet = new Bet(betName, betNotes, betPenalty, false);
 
