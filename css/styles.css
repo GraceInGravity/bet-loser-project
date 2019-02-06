@@ -1,7 +1,45 @@
-input, select {
-  display:block;
-  margin-bottom: 10px;
+/* ******** NON-MOBILE STYLES (*********) */
+@media only screen and (min-width: 600px) {
+
+  .container-fluid {
+    min-height: 100%;
+  }
+
+  html {
+    font-size: 18px;
+  }
+
+  label {
+  position: relative;
+  top: 2px;
 }
+
+}
+
+/* ******** MOBILE FIRST DEFAULT STYLES (*********) */
+
+html {
+  font-size: 21px;
+}
+
+
+input, select {
+  /* display:block; */
+  margin-bottom: 10px;
+
+}
+
+/* ********** INPUT BORDER ON MOBILE ******** */
+textarea, input, select {
+  border: 1px solid #ccc;
+  border-radius: 2px;
+}
+
+/* ***** FULL WIDTH INPUTS ON BET FORM */
+#bet-form textarea, #bet-form input, #bet-form select  {
+    width: 100%;
+}
+
 
 ul {
   padding : 0;
@@ -12,8 +50,8 @@ li {
   width: 100%;
 }
 
-h5 {
-  margin-bottom: 30px;
+h6.card-title {
+  margin-bottom: 0px;
 }
 
 .results-display {
@@ -21,17 +59,24 @@ h5 {
 }
 
 .card {
-  padding: 0px;
+  padding: 0px 0px 20px 0px;
+  text-align: left;
+
+}
+
+p.card-text {
+  margin-bottom: .5rem;
 }
 
 .card-header {
   width: 100%;
-  font-size: 24px;
+  font-size: 36px;
 }
 
-/* #bet-form {
-  display: none;
-} */
+h1, h2 {
+  font-family: Barlow;
+}
+
 
 .bet-container {
   margin-top: 90px;
@@ -45,6 +90,10 @@ h5 {
 img[src="imgs/add-icon.png"] {
   float: right;
   width: 60px;
-  position: relative;
-  top: -35px;
+  /* position: relative;
+  top: -38px; */
+}
+
+.button-row {
+  text-align: center;
 }

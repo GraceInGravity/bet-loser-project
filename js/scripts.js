@@ -40,14 +40,14 @@ Bet.prototype.getDisplayHTML = function () {
     <div class="collapse" id="details' + this.id + '"> \
       <div class="card-body"> \
         <p class="card-text">' + this.betTerms + '</p> \
-        <h5 class="card-title">Participants</h5> \
-        <p class="card-text"><span class="betUser>">' + this.betUsers[0].userName + '</span><span class="betUser">' + this.betUsers[1].userName + '</span></p> \
-        <h5 class="card-title">Stakes</h5> \
+        <h6 class="card-title">Participants</h6> \
+        <p class="card-text"><span class="betUser>">' + this.betUsers[0].userName + '</span>, <span class="betUser">' + this.betUsers[1].userName + '</span></p> \
+        <h6 class="card-title">Stakes</h6> \
         <p class="card-text">' + this.betPenalty.penaltyCategory + '</p> \
         <p class="card-text">' + this.betPenalty.penaltyAmount + '</p> \
         <p class="card-text">' + this.betPenalty.penaltyDue + '</p> \
       </div> \
-    <button type="button" class="complete" id="' + this.id + '" name="win-btn" data-toggle="modal" data-target="#declareWinnerModal">Select Winner</button></div> \
+    <div class="button-row"><button type="button" class="complete btn btn-info" id="' + this.id + '" name="win-btn" data-toggle="modal" data-target="#declareWinnerModal">Select Winner</button></div></div> \
   </li>'
 
   return html;
@@ -77,7 +77,7 @@ Bet.prototype.showPenalty = function(){
 
 Bet.prototype.showMoneyPenalty = function() {
   this.assignWinner();
-  $("#list-item-" + this.id + " .card-body").append(this.betLoser.userName + " is the Loser! <br>" + "You have " + this.betPenalty.penaltyTimeLimit + " days to pay " + this.betWinner.userName + " $" + this.betPenalty.penaltyAmount);
+  $("#list-item-" + this.id + " .card-body").append("<p>" + this.betLoser.userName + " is the loser! <br>" + this.betLoser.userName + " has until " + this.betPenalty.penaltyDue + " to pay " + this.betWinner.userName + " $" + this.betPenalty.penaltyAmount + ".</p>");
   $("#list-item-" + this.id + " button:last-child").hide();
   $("#list-item-" + this.id).appendTo("#completed-bets");
 }
@@ -101,7 +101,7 @@ Bet.prototype.getCharityHTML  = function() {
   var charityEmail = ["darcie@habitatportlandmetro.org", "contact.us@ppfa.org", "info@naeh.org", "info@mealsonwheelsamerica.org" ]
   var charityWebsite = ["habitat.org", "plannedparenthood.org", "endhomelessness.org", "mealsonwheelsamerica.org" ]
   var randomIndex = Math.floor((Math.random() * charityName.length));
-  return "<p>You owe " + this.betPenalty.penaltyAmount + " dollars to " + charityName[randomIndex] + ". You can reach them by email at " + charityEmail[randomIndex] + ", or you can visit their website at " + charityWebsite[randomIndex] + "</p>";
+  return "<p>You owe " + this.betPenalty.penaltyAmount + " dollars to " + charityName[randomIndex] + ". You can reach them by email at " + charityEmail[randomIndex] + ", or you can visit their website at " + charityWebsite[randomIndex] + ". Please donate by " + this.betPenalty.penaltyDue + ".</p>";
 }
 
 
@@ -137,9 +137,9 @@ Penalty.prototype.timeBet = function(penaltyChoice, timeLevel){
 
 Penalty.prototype.prankBet = function(prankLevel){
 
-  var prankList = ["sing in public 'Do You Want To Snowman'", "deliver flowers to your crush",  " get at least $20 from strangers", "Jump into the Willamette", " do the naked bike ride but not actually during the Naked Bike Ride", "wear a Make America Great Again hat to People's Coop"];
+  var prankList = ["sing in public 'Do You Want To Build a Snowman'", "deliver flowers to your crush",  " get at least $20 from strangers", "Jump into the Willamette river", " do the naked bike ride but not actually during the Naked Bike Ride", "wear a Make America Great Again hat to People's Co-op"];
 
-  return "You must" + prankList[prankLevel];  // ** prank needs to be defined
+  return "You must" + prankList[prankLevel];
 }
 
 
