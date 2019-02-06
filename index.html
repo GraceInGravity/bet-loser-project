@@ -11,8 +11,8 @@
     <script type="text/javascript" src="js/moment.min.js"></script> <!-- ** DATE FORMATTING -- >
 
     <!-- Google font API -->
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=PT+Serif:400,400italic,700,700italic">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Barlow:200,300,400,400i,500,600,600i,700,800">
+    <link href="https://fonts.googleapis.com/css?family=Fontdiner+Swanky" rel="stylesheet">
+
     <meta name="viewport" content="width=device-width, initial-scale=1.0">  <!-- *** FOR MOBILE *** -->
     <title>Bet Loser - Making Losing Bets Fun</title>
   </head>
@@ -31,17 +31,18 @@
               <div class="modal-body">
                 <form id="bet-form">
                   <label for="bet-name">Bet Name</label>
-                  <input type="text" name="bet-name" value="High Stakes Bet" placeholder="Call your bet something memorable" required>
+                  <input type="text" name="bet-name" value="" placeholder="Call your bet something memorable" required>
                   <label for="user1">Bettor 1</label>
-                  <input type="text" name="user1" value="Ward" placeholder="Your name" required>
+                  <input type="text" name="user1" value="" placeholder="Your name" required>
                   <label for="email1">Bettor 1 Email</label>
-                  <input type="email" name="email1" value="Ward@email.com" placeholder="You@email.com">
+                  <input type="email" name="email1" value="" placeholder="You@email.com">
                   <label for="user2">Bettor 2</label>
-                  <input type="text" name="user2" value="Tracy" placeholder="Your friend's name">
+                  <input type="text" name="user2" value="" placeholder="Your friend's name">
                   <label for="email2">Bettor 2 Email</label>
-                  <input type="email" name="email2" value="Tracy@email.com" placeholder="Friend@email.com">
+                  <input type="email" name="email2" value="" placeholder="Friend@email.com">
                   <label for="bet-select">Wager Category</label>
-                  <select name="bet-select" required>
+                  <select name="bet-select" id="cat-select" required>
+                    <option name="default" value="default" disabled selected>- Select -</option>
                     <option name="donation" value="donation">Donation to a Charity</option>
                     <option name="volunteer" value="volunteer">Volunteer at a Charity</option>
                     <option name="money" value="money">Money payoff!</option>
@@ -49,12 +50,12 @@
                     <option name="prank" value="prank">Prank!</option>
                   </select>
                   <label for="amount">Amount of Bet</label>
-                  <input type="number" name="amount" id="amount" value="100"
+                  <input type="number" name="amount" id="amount" value=""
                 </select>
                 <label for="duedate">Due Date</label>
                 <input type="date" name="duedate" id="duedate" value="">
                 <label for="bet-notes">Terms of the Bet</label>
-                <textarea name="bet-notes" rows="4" cols="40">Pats win the Super Bowl</textarea>
+                <textarea name="bet-notes" rows="4" cols="40"></textarea>
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Forget It</button>
                 <button type="submit" class="btn btn-primary" name="submit">Add Bet</button>
               </form>

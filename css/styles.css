@@ -14,12 +14,20 @@
   top: 2px;
 }
 
+h1 {
+  font-size: 60px;
+}
+
 }
 
 /* ******** MOBILE FIRST DEFAULT STYLES (*********) */
 
 html {
   font-size: 21px;
+}
+
+.container-fluid {
+  padding-top: 20px;
 }
 
 
@@ -73,8 +81,8 @@ p.card-text {
   font-size: 36px;
 }
 
-h1, h2 {
-  font-family: Barlow;
+h1, h2, h3, h4, h5  {
+  font-family: 'Fontdiner Swanky', cursive;
 }
 
 
