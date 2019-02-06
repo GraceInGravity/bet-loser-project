@@ -50,6 +50,10 @@ li {
   width: 100%;
 }
 
+li .card-header:hover {
+  cursor: pointer;
+}
+
 h6.card-title {
   margin-bottom: 0px;
 }
@@ -103,6 +107,18 @@ img[src="imgs/add-icon.png"] {
 
 .card-body > * {
   margin-bottom: 20px;
+}
+
+input[name="winner"] {
+  display:none;
+}
+
+input[name="winner"]:checked + label {
+  color: red;
+}
+
+input[name="winner"] + label:hover {
+  background-color: blue;
 }
 
 .bet-user-container-row {
