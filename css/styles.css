@@ -12,11 +12,16 @@
   label {
   position: relative;
   top: 2px;
-}
+  }
 
-h1 {
-  font-size: 60px;
-}
+  h1 {
+    font-size: 5rem;
+  }
+
+   .bet-container h2 {
+    font-size: 2rem;
+  }
+
 
 }
 
@@ -81,8 +86,12 @@ p.card-text {
   font-size: 36px;
 }
 
-h1, h2, h3, h4, h5  {
+h1, h2, h3 {
   font-family: 'Fontdiner Swanky', cursive;
+}
+
+h2 {
+  font-size: 1.5rem;
 }
 
 
