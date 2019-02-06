@@ -10,11 +10,11 @@
     <script type="text/javascript" src="js/scripts.js"></script>
     <script type="text/javascript" src="js/moment.min.js"></script> <!-- ** DATE FORMATTING -- >
 
+    <!-- Google font API -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=PT+Serif:400,400italic,700,700italic">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Barlow:200,300,400,400i,500,600,600i,700,800">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">  <!-- *** FOR MOBILE *** -->
     <title>Bet Loser - Making Losing Bets Fun</title>
-    <!-- Google font API -->
-<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=PT+Serif:400,400italic,700,700italic">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Barlow:200,300,400,400i,500,600,600i,700,800">
   </head>
   <body>
     <div class="container-fluid">
@@ -87,8 +87,8 @@
               </div>
               <div class="modal-body">
                 <form class="results-display">
-                  <p><input type="radio" id='user1' name="winner" value="0"> <label for="bet-user1"></label></p>
-                  </p><input type="radio" id='user2' name="winner" value="1"> <label for="bet-user2"></label></p>
+                  <p><input type="radio" id='bet-user1' name="winner" value="0"> <label for="bet-user1"></label></p>
+                </p><input type="radio" id='bet-user2' name="winner" value="1"> <label for="bet-user2"></label></p>
                   <button type="button" class="btn btn-primary" id="modal-winner-submit" name="button"  data-dismiss="modal">Declare Winner</button>
                 </form>
               </div>
@@ -102,6 +102,7 @@
 
       </div>
     </div>
+
   </body>
 
 </html>
