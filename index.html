@@ -34,7 +34,7 @@
               <label for="bet-select">Choose Your Wager Category</label>
               <select name="bet-select">
                 <option name="money" value="money">Money</option>
-                <option name="prank" value="prank">Prank</option>
+                <option name="charity" value="charity">Charity</option>
               </select>
               <label for="amount">Amount of your bet</label>
               <input type="number" name="amount" id="amount" value="100">
@@ -53,18 +53,13 @@
     <div class="container">
       <h1>Bet Loser</h1>
       <h5>Don't be a loser!</h5>
+      <a href="#"><img src="imgs/add-icon.png"  data-toggle="modal" data-target="#addBetModal"></a>
 
       <div class="bet-container">
-        <div>
-
-          <a href="#"><img src="imgs/add-icon.png"  data-toggle="modal" data-target="#addBetModal"></a>
-          <h2>Your Active Bets</h2>
-
-
-
-        </div>
-        <ul id="active-bets" class="row">
-        </ul>
+        <h2>Active Bets</h2>
+        <ul id="active-bets"></ul>
+        <h2>Completed Bets</h2>
+        <ul id="completed-bets"></ul>
       </div>
 
 
@@ -80,10 +75,10 @@
             </div>
             <div class="modal-body">
               <form class="results-display">
-                <label for="user1"></label>
-                <input type="radio" id='user1' name="winner" value="1">
-                <label for="user2"></label>
-                <input type="radio" id='user2' name="winner" value="2">
+                <label for="bet-user1"></label>
+                <input type="radio" id='user1' name="winner" value="0">
+                <label for="bet-user2"></label>
+                <input type="radio" id='user2' name="winner" value="1">
                 <button type="button" id="modal-winner-submit" name="button"  data-dismiss="modal">Declare Winner</button>
               </form>
             </div>
