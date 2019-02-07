@@ -37,7 +37,7 @@ Seafoam Green #70C1B3
   }
 
     .container h4 {
-     font-size: 3rem;
+     font-size: 2rem;
    }
 
 
@@ -130,20 +130,26 @@ h2.complete {
 
 .bet-container {
   padding: 10px;
-  background-color: #B5D7E5;
+  background-color: rgba(255, 255, 255, 0.8); /* #B5D7E5;*/
   border-radius: 10px;
+  box-shadow: 4px 4px 10px rgba(100, 100, 100, 0.8), 2px 2px 4px rgba(100, 100, 100, 0.8) ;
 }
 
 h4 {
-  font-family: 'Mr Dafoe', cursive;
-  font-size: 2rem;
+  font-family: 'Rock Salt', cursive;
+  font-size: 1.0rem;
   margin-top: 0;
   color: #FFE066;
 }
 
+/* font-family: 'Sedgwick Ave', cursive; */
+/* font-family: 'Rock Salt', cursive; */
+/* font-family: 'Yellowtail', cursive; */
+
 h1 {
   margin-bottom: 0;
   color: #F25F5C;
+  text-shadow: 1px 1px 2px rgba(60, 60, 60, 0.8);
 }
 
 
