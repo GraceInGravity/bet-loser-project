@@ -104,7 +104,7 @@ Bet.prototype.showPenalty = function(){
     this.showPranksPenalty();
   } else {console.log("Problem with penaltyCategory choice")}
   $("#list-item-" + this.id).prependTo("#completed-bets");
-  $("#list-item-" + this.id).draggable(); //allows it to be dragged
+  $("#list-item-" + this.id).draggable({ revert: "invalid" }); //allows it to be dragged
 
 }
 
@@ -321,7 +321,6 @@ $(function(){
  // drop on trashcan
   $("#trash").droppable({
     drop: function(event,li) {
-      alert("dropped");
       $(li.draggable.remove());
     }
   });
