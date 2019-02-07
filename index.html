@@ -28,57 +28,87 @@
                 <span aria-hidden="true">&times;</span>
               </button>
             </div>
+
             <div class="modal-body">
+
               <form id="bet-form">
-                <label for="bet-name">Bet Name</label>
-                <input type="text" name="bet-name" value="" placeholder="Call your bet something memorable" required>
-                <label for="user1">Bettor 1</label>
-                <input type="text" name="user1" value="" placeholder="Your name" required>
-                <label for="email1">Bettor 1 Email</label>
-                <input type="email" name="email1" value="" placeholder="You@email.com">
-                <label for="user2">Bettor 2</label>
-                <input type="text" name="user2" value="" placeholder="Your friend's name">
-                <label for="email2">Bettor 2 Email</label>
-                <input type="email" name="email2" value="" placeholder="Friend@email.com">
-                <label for="bet-select">Wager Category</label>
-                <select name="bet-select" id="cat-select" required>
-                  <option name="default" value="default" selected disabled >- Select -</option>
-                  <option name="donation" value="donation">Donation to a Charity</option>
-                  <option name="volunteer" value="volunteer">Volunteer at a Charity</option>
-                  <option name="money" value="money">Money payoff!</option>
-                  <option name="chores" value="chores">Do Chores!</option>
-                  <option name="prank" value="prank">Prank!</option>
-                </select>
-                <label for="amount">Amount of Bet</label>
-                <input type="number" name="amount" id="amount" value=""
-              </select>
-              <label for="duedate">Due Date</label>
-              <input type="date" name="duedate" id="duedate" value="">
-              <label for="bet-notes">Terms of the Bet</label>
-              <textarea name="bet-notes" rows="4" cols="40"></textarea>
-              <button type="button" class="btn btn-secondary" data-dismiss="modal">Forget It</button>
-              <button type="submit" class="btn btn-primary" name="submit">Add Bet</button>
-            </form>
+
+                <div class="question-container current-question" id="q1">
+                    <h6>Who is involved in the bet?</h6>
+                    <label for="user1">Player 1</label>
+                    <input type="text" name="user1" value="" placeholder="Your name" required>
+                    <label for="email1">Player 1's Email</label>
+                    <input type="email" name="email1" value="" placeholder="You@email.com">
+                    <label for="user2">Player 2</label>
+                    <input type="text" name="user2" value="" placeholder="Your friend's name">
+                    <label for="email2">Player 2's Email</label>
+                    <input type="email" name="email2" value="" placeholder="Friend@email.com">
+                    <button type="button" class='btn btn-outline-secondary back' disabled>Back</button>
+                    <button type="button" class='btn btn-info next'>Next</button>
+
+                </div>
+
+                <div class="question-container" id="q2">
+                    <h6>What are you betting on?</h6>
+                    <label for="bet-name">Title</label>
+                    <input type="text" name="bet-name" value="" placeholder="Call your bet something memorable" required>
+                    <label for="bet-notes">Description</label>
+                    <textarea name="bet-notes" rows="4" cols="40"></textarea>
+                    <button type="button" class='btn btn-outline-secondary back'>Back</button>
+                    <button type="button" class='btn btn-info next next'>Next</button>
+
+                </div>
+
+                <div class="question-container" id="q3">
+                    <h6>What's at stake for the <span>Bet Loser</span></h6>
+                    <label for="bet-select">Penalty Categories</label>
+                    <select name="bet-select" id="cat-select" required>
+                      <option name="default" value="default" selected disabled >- Select -</option>
+                      <option name="donation" value="donation">Donation to a Random Charity</option>
+                      <option name="volunteer" value="volunteer">Volunteer at a Random Charity</option>
+                      <option name="money" value="money">Money Payoff to the Winner!</option>
+                      <option name="chores" value="chores">Do a Random Chore for the Winner!</option>
+                      <option name="prank" value="prank">Random Humiliation!</option>
+                    </select>
+                    <label for="amount">Amount of Bet</label>
+                    <input type="number" name="amount" id="amount" value="">
+
+                    <button type="button" class='btn btn-outline-secondary back'>Back</button>
+                    <button type="submit" class="btn btn-primary" name="submit">Add Bet</button>
+
+                </div>
+              </form>
+
+            </div>
           </div>
         </div>
       </div>
-    </div>
-    <!-- ************* THE PAGE ********** -->
-    <!-- <div class="container"> -->
-      <h1>Bet Loser</h1>
-      <h4>Making Losing Fun!</h4>
-      <button class="btn btn-sm btn-success" data-toggle="modal" data-target="#addBetModal"><img src="imgs/add-icon-green-solid.png">New Bet</button>
+      <!-- ************* THE PAGE ********** -->
+      <!-- <div class="container"> -->
 
-
-      <div class="bet-container col-md-4">
-        <h2 class="active">Active Bets</h2>
-        <ul id="active-bets"></ul>
+      <div class="header">
+        <div class="logo">
+          <h1>Bet Loser</h1>
+          <h4>Making Losing Fun!</h4>
+        </div>
       </div>
-      <div class="bet-container col-md-4">
-        <h2 class="complete">Completed Bets</h2>
-        <ul id="completed-bets"></ul>
-      </div>
+      <button class="btn btn-sm btn-success add-bet" data-toggle="modal" data-target="#addBetModal">New Bet <img src="imgs/add-icon-green-solid.png"></button>
 
+
+
+
+      <div class="bet-display">
+
+        <div class="bet-container active-bet-display">
+          <h2 class="active">Active Bets</h2>
+          <ul id="active-bets"></ul>
+        </div>
+        <div class="bet-container completed-bet-display">
+          <h2 class="complete">Completed Bets</h2>
+          <ul id="completed-bets"></ul>
+        </div>
+
+      </div>
 
 
       <!-- ************** DECLARE WINNER MODAL ************ -->
@@ -97,8 +127,12 @@
                 <div class="winner-options">
                   <input type="radio" id='bet-user1' name="winner" value="0"> <label for="bet-user1"></label>
                   <input type="radio" id='bet-user2' name="winner" value="1"> <label for="bet-user2"></label>
+                  <div>
+                    <label for="duedate">Loser must pay up by</label>
+                    <input type="date" name="duedate" id="duedate" value="">
+                  </div>
                 </div>
-                  <button type="button" class="btn btn-primary" id="modal-winner-submit" name="button"  data-dismiss="modal">Declare Winner</button>
+                <button type="button" class="btn btn-primary" id="modal-winner-submit" name="button"  data-dismiss="modal">Declare Winner</button>
               </form>
             </div>
           </div>
@@ -109,9 +143,9 @@
 
       </div>
 
-    <!-- </div> -->
-  </div>
+      <!-- </div> -->
+    </div>
 
-</body>
+  </body>
 
-</html>
+  </html>
