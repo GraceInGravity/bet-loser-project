@@ -244,7 +244,11 @@ $(function(){
     $("#active-bets").show();
     var currentBet = new Bet()
 
-    //  ******  CLEAR OUT BET ENTRY FIELDS AFTER CREATING BET  
+    //  ******  CLEAR OUT BET ENTRY FIELDS AFTER CREATING BET
+    // $("#bet-form input").each(function(inputField){
+    //   $(this).val("");
+    // });
+
     var myArray = [$("input[name='bet-name']"), $("input[name='user1']"), $("input[name='email1']"),$("input[name='user2']"), $("input[name='email2']"), $("select[name='bet-select'] option:selected"), $("input[name='amount']"), $("input[name='duedate']"), $("textarea[name='bet-notes']")];
     for (var i = 0; i<myArray.length;i ++) {
       myArray[i].val("");
