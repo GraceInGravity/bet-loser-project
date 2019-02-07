@@ -4,9 +4,11 @@
   <meta charset="utf-8">
   <title>Bet Loser</title>
   <link rel="stylesheet" href="css/bootstrap.css">
+  <link rel="stylesheet" href="css/jquery-ui.css">
   <link rel="stylesheet" href="css/styles.css">
   <script type="text/javascript" src="js/jquery-3.3.1.js"></script>
   <script type="text/javascript" src="js/bootstrap.js"></script>
+  <script type="text/javascript" src="js/jquery-ui.js"></script>
   <script type="text/javascript" src="js/scripts.js"></script>
   <script type="text/javascript" src="js/moment.min.js"></script> <!-- ** DATE FORMATTING -- >
 
@@ -17,6 +19,7 @@
   </head>
   <body>
     <div class="container-fluid">
+
 
       <!-- ************* ADD BET MODAL ************ -->
       <div class="modal" id="addBetModal" tabindex="-1" role="dialog">
@@ -94,6 +97,9 @@
           <h4>Making Losing Fun!</h4>
       </div>
       <button class="btn btn-sm btn-success add-bet" data-toggle="modal" data-target="#addBetModal">New Bet <img src="imgs/add-icon-green-solid.png"></button>
+      <img src="imgs/trash-icon.png" alt="A trash can icon" id="trash">
+
+
 
 
 
@@ -108,6 +114,7 @@
           <h2 class="complete">Completed Bets</h2>
           <ul id="completed-bets"></ul>
         </div>
+
 
       </div>
 
@@ -140,9 +147,7 @@
         </div>
       </div>
       <!-- to show after button#win-chooser is clicked -->
-      <div class="resolution">
-
-      </div>
+    
 
       <!-- </div> -->
     </div>

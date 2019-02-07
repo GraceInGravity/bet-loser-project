@@ -48,7 +48,7 @@ Darker seafoam #1cb29a
   }
 
   div.bet-container {
-    margin-top: 56px;
+    margin-top: 20px;
     text-align: center;
     width: 49%;
   }
@@ -79,6 +79,13 @@ input, select {
 
 strong {
   font-weight: 600;
+}
+
+#trash {
+  float:right;
+  height: 40px;
+  width: 40px;
+
 }
 
 /* ********** INPUT BORDER ON MOBILE ******** */
@@ -209,7 +216,7 @@ h1 {
 
 .bet-container {
   width: 100%;
-  margin-top: 30px;
+  margin-top: 15px;
   text-align: center;
 }
 
