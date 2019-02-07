@@ -126,11 +126,20 @@ img[src="imgs/add-icon.png"] {
   margin-bottom: 20px;
 }
 
+.winner-options {
+  text-align: center;
+}
+
 input[name="winner"] {
   display:none;
 }
 
+input[name="winner"] + label {
+  text-align: center;
+}
+
 input[name="winner"]:checked + label {
+  display: inline-block;
   color: red;
 }
 
@@ -144,12 +153,17 @@ input[name="winner"] + label:hover {
   justify-content: flex-start;
 }
 
-.bet-user-container{
+.bet-user-container {
   display: flex;
   flex-direction: column;
   align-items: center;
   margin-right: 20px;
   text-align: center;
+}
+
+button#modal-winner-submit {
+  display: block;
+  margin: 0 auto;
 }
 
 .bet-user-container img {
