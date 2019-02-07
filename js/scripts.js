@@ -36,7 +36,7 @@ Bet.prototype.assignId = function(user) {
 Bet.prototype.getDisplayHTML = function () {
   var html  = '\
   <li class="card" id="list-item-' + this.id + '"> \
-  <button class="card-header" type="button" data-toggle="collapse" data-target="#details'+ this.id + '" aria-expanded="false" aria-controls="collapseExample">' + this.betName + ' bet#' + this.id + '</button> \
+  <div class="card-header" data-toggle="collapse" data-target="#details'+ this.id + '" aria-expanded="false" aria-controls="collapseExample">' + this.betName + ' bet#' + this.id + '</div> \
   <div class="collapse" id="details' + this.id + '"> \
   <div class="card-body"> \
   <p class="card-text bet-descrip">' + this.betTerms + '</p> \
@@ -47,7 +47,7 @@ Bet.prototype.getDisplayHTML = function () {
   }
 
   html += '</div> \
-  <h5 class="card-title">What\'s at Stake</h5> \
+  <h6 class="card-title">What\'s at Stake</h6> \
   <p class="card-text"><strong>Amount:</strong> '  + this.betPenalty.penaltyAmount + '</p> \
   <p class="card-text"><strong>Category:</strong> ' + this.betPenalty.penaltyCategory + '</p> \
   <p class="card-text"><strong>Paid By:</strong> ' + this.betPenalty.penaltyDue + '</p> \

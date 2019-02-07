@@ -29,17 +29,17 @@ Darker seafoam #1cb29a
   top: 2px;
   }
 
-  h1 {
-    font-size: 5rem;
+  .container h1 {
+    font-size: 4rem;
   }
 
    .bet-container h2 {
     font-size: 2rem;
   }
 
-    .container h4 {
-     font-size: 2rem;
-   }
+  .container h4 {
+    font-size: 2rem;
+  }
 
 
 }
@@ -72,7 +72,7 @@ strong {
 /* ********** INPUT BORDER ON MOBILE ******** */
 textarea, input, select {
   border: 1px solid #ccc;
-  border-radius: 2px;
+  border-radius: 4px;
 }
 
 /* ***** FULL WIDTH INPUTS ON BET FORM */
@@ -95,27 +95,26 @@ li .card-header:hover {
 }
 
 h6.card-title {
-  margin-bottom: 0px;
+  font-family: 'Rock Salt', cursive;
+  margin-bottom: .5rem;
+
 }
 
 .results-display {
   display: none;
 }
 
-.card {
-  padding: 0px 0px 20px 0px;
-  text-align: left;
-
-}
 
 p.card-text {
   margin-bottom: .5rem;
 }
 
 .card-header {
+  background-color: #3FC1AC;
   width: 100%;
   font-size: 36px;
-  background-color: #3FC1AC;
+  font-weight: 600;
+  padding: .5rem 1.0rem;
 }
 
 h1, h2, h3 {
@@ -177,6 +176,7 @@ h5 {
 /* font-family: 'Yellowtail', cursive; */
 
 h1 {
+  font-size: 2rem;
   margin-bottom: 0;
   color: #F25F5C;
   text-shadow: 1px 1px 2px rgba(9, 55, 79, 0.8);
@@ -217,6 +217,7 @@ img[src="imgs/add-icon.png"] {
   display: flex;
   flex-flow: column nowrap;
   justify-content: center;
+  text-align: left;
 }
 
 .card-body > * {
@@ -273,16 +274,17 @@ button#modal-winner-submit {
   display: flex;
   flex-flow: row nowrap;
   justify-content: center;
+  margin-bottom: 20px;
 }
 
 button {
   text-transform: uppercase;
-  letter-spacing: .1em;
+  letter-spacing: 0.05rem;
   border: none;
   font-weight: 600;
 }
 
-button[type=button] {
+.btn-secondary {
   background-color: #50514F;
 }
 
