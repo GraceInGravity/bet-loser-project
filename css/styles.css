@@ -34,6 +34,7 @@ Darker seafoam #1cb29a
     font-size: 4rem;
   }
 
+
    .bet-container h2 {
     font-size: 2rem;
   }
@@ -110,10 +111,6 @@ h6.card-title {
   margin-bottom: .5rem;
 }
 
-.header {
-  height: 200px;
-}
-
 .logo {
   float: left;
 }
@@ -126,12 +123,22 @@ p.card-text {
   margin-bottom: .5rem;
 }
 
+
+  .header {
+    margin-bottom: 1rem;
+  }
+
 .card-header {
   background-color: #3FC1AC;
   width: 100%;
   font-size: 36px;
   font-weight: 600;
   padding: .5rem 1.0rem;
+}
+
+.completed  {
+  background-color: #50514F;
+  color: #fff;
 }
 
 h1, h2, h3 {
@@ -201,7 +208,7 @@ h1 {
 
 
 .bet-container {
-  width: 35%;
+  width: 100%;
   margin-top: 30px;
   text-align: center;
 }
@@ -227,6 +234,10 @@ img[src="imgs/add-icon.png"] {
   font-weight: 600;
   text-transform: uppercase;
   font-size: 85%;
+}
+
+.amount {
+  display: none;
 }
 
 .active-bet-display {
@@ -259,15 +270,21 @@ input[name="winner"] {
 
 input[name="winner"] + label {
   text-align: center;
+  padding-bottom: 0px;
+  border-radius: 6px;
 }
 
 input[name="winner"]:checked + label {
   display: inline-block;
-  color: red;
+  background-color: #70C1B3;
 }
 
 input[name="winner"] + label:hover {
-  background-color: blue;
+  background-color: #b5e0d9;
+}
+
+input[name="winner"]:checked + label:hover {
+  background-color: #70C1B3;
 }
 
 .bet-user-container-row {
@@ -280,7 +297,7 @@ input[name="winner"] + label:hover {
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-right: 20px;
+  margin: 8px 10px 0px 10px;
   text-align: center;
 }
 
@@ -328,9 +345,6 @@ btn-outline-secondary:hover {
   border: 0;
 }
 
-button.complete {
-  background-color: #247BA0;
-}
 
 .add-bet {
   background-color: rgba(255, 255, 255, 0.85); /* #B5D7E5;*/

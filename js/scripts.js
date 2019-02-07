@@ -33,10 +33,11 @@ Bet.prototype.assignId = function(user) {
   this.currentUserIndex += 1;
 }
 
+// ********* BET DETAILS CARD ****
 Bet.prototype.getDisplayHTML = function () {
   var html  = '\
   <li class="card" id="list-item-' + this.id + '"> \
-  <div class="card-header" data-toggle="collapse" data-target="#details'+ this.id + '" aria-expanded="false" aria-controls="collapseExample">' + this.betName + ' bet#' + this.id + '</div> \
+  <div class="card-header" data-toggle="collapse" data-target="#details'+ this.id + '" aria-expanded="false" aria-controls="collapseExample">' + this.betName + '</div> \
   <div class="collapse" id="details' + this.id + '"> \
   <div class="card-body"> \
   <p class="card-text bet-descrip">' + this.betTerms + '</p> \
@@ -48,16 +49,17 @@ Bet.prototype.getDisplayHTML = function () {
 
   html += '</div> \
   <h6 class="card-title">What\'s at Stake</h6> \
-  <p class="card-text"><strong>Amount:</strong> '  + this.betPenalty.penaltyAmount + '</p> \
-  <p class="card-text"><strong>Category:</strong> ' + this.betPenalty.penaltyCategory + '</p> \
-  <p class="card-text"><strong>Pay Up By:</strong> ' + this.betPenalty.penaltyDue + '</p> \
+  <p class="card-text"><strong>Amount of Bet:</strong> '  + this.betPenalty.penaltyAmount + '</p> \
+  <p class="card-text"><strong>Penalty Category:</strong> ' + this.betPenalty.penaltyCategory + '</p> \
   </div> \
   <div class="button-row text-center"><button type="button" class="complete btn btn-info" id="' + this.id + '" name="win-btn" data-toggle="modal" data-target="#declareWinnerModal">Select Winner</button></div> \
   </div> \
   </li>'
-
+  $("span.active-bet-name").text(this.betName);
   return html;
 };
+// Payment due to be added to card when moved to completed
+  // <p class="card-text"><strong>Pay Up By:</strong> ' + this.betPenalty.penaltyDue + '</p> \
 
 function User(userName, userEmail, userBank) {
   this.userName = userName;
@@ -233,6 +235,19 @@ $(function(){
     changeQuestion(questionIndex);
   });
 
+  $("select[name='bet-select']").change(function(){
+    if($(this).val() === 'donation' || $(this).val() === 'money') {
+      console.log($(this).val());
+      $(".amount").show();
+      $("label[for='amount']").text("$ amount of your bet");
+    } else if($(this).val() === 'volunteer') {
+      $(".amount").show();
+      $("label[for='amount']").text("Hours volunteering");
+    } else {
+      $(".amount").hide();
+    }
+  });
+
 
   $("#bet-form").submit(function(event){
     event.preventDefault();
@@ -243,20 +258,18 @@ $(function(){
     var betUser2Email = $("input[name='email2']").val();
     var betCategory = $("select[name='bet-select'] option:selected").val();
     var betAmount = $("input[name='amount']").val();
-    var betDueInput = $("input[name='duedate']").val();
     var betNotes = $("textarea[name='bet-notes']").val();
     var betPenalty = "Bet Penalty Goes Here";
 
-    var betDueDays = Date.parse($("input[name='duedate']").val()); // ** In case we want to do math with the date **//
+    var betDueDays = Date.parse($("input[name='duedate']").val()); // ** IGNORE THIS LINE *** In case we want to do math with the date **//
     // var betDue = new Date()
-    var betDue = moment(betDueInput).format('MMMM D, YYYY'); // ** Convert date input 2019-04-12 format to April 12th, 2019 ** //
 
     // Parameter is zero waiting for bank account field
     var user1 = new User(betUser1, betUser1Email, 0);
     var user2 = new User(betUser2, betUser2Email, 0);
 
     // Parameters are (category, duration, betamount, due date)
-    var betPenalty = new Penalty(betCategory, 0, betAmount, betDue);
+    var betPenalty = new Penalty(betCategory, 0, betAmount);
     console.log(betPenalty);
     // Parameters are (betname, betnotes, betpenalty)
     var newBet = new Bet(betName, betNotes, betPenalty);
@@ -288,14 +301,20 @@ $(function(){
 
 
   $("#active-bets").on("click", ".complete", function(){
-
     tempBetId = $(this).attr('id');
     $(".results-display").show();
     betBook.bets[tempBetId].showWinWindow();
   });
 
+  // **** WINNER SELECTION MODAL ***
   $("#modal-winner-submit").click(function(){
+    var betDueInput = $("input[name='duedate']").val();
+    var betDue = moment(betDueInput).format('MMMM D, YYYY'); // ** Convert date input 2019-04-12 format to April 12th, 2019 ** //
+
+    // var betPenalty = new Penalty(betCategory, 0, betAmount, betDue);
+    betBook.bets[tempBetId].betPenalty.penaltyDue = betDue;
     betBook.bets[tempBetId].showPenalty();
+    $(".card-header").addClass("completed");
   });
 
 });
