@@ -325,7 +325,7 @@ $(function(){
     $(".card-header").addClass("completed");
   });
  // drop on trashcan
-  $("#trash").droppable({
+  $(".trash").droppable({
     drop: function(event,li) {
       $(li.draggable.remove());
     }
