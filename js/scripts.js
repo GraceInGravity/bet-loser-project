@@ -33,6 +33,7 @@ Bet.prototype.assignId = function(user) {
   this.currentUserIndex += 1;
 }
 
+// ********* BET DETAILS CARD ****
 Bet.prototype.getDisplayHTML = function () {
   var html  = '\
   <li class="card" id="list-item-' + this.id + '"> \
@@ -54,7 +55,7 @@ Bet.prototype.getDisplayHTML = function () {
   <div class="button-row text-center"><button type="button" class="complete btn btn-info" id="' + this.id + '" name="win-btn" data-toggle="modal" data-target="#declareWinnerModal">Select Winner</button></div> \
   </div> \
   </li>'
-
+  $("span.active-bet-name").text(this.betName);
   return html;
 };
 // Payment due to be added to card when moved to completed
@@ -257,11 +258,10 @@ $(function(){
     var betUser2Email = $("input[name='email2']").val();
     var betCategory = $("select[name='bet-select'] option:selected").val();
     var betAmount = $("input[name='amount']").val();
-
     var betNotes = $("textarea[name='bet-notes']").val();
     var betPenalty = "Bet Penalty Goes Here";
 
-    var betDueDays = Date.parse($("input[name='duedate']").val()); // ** IGNORE THIS LINE In case we want to do math with the date **//
+    var betDueDays = Date.parse($("input[name='duedate']").val()); // ** IGNORE THIS LINE *** In case we want to do math with the date **//
     // var betDue = new Date()
 
     // Parameter is zero waiting for bank account field
@@ -301,12 +301,12 @@ $(function(){
 
 
   $("#active-bets").on("click", ".complete", function(){
-
     tempBetId = $(this).attr('id');
     $(".results-display").show();
     betBook.bets[tempBetId].showWinWindow();
   });
 
+  // **** WINNER SELECTION MODAL ***
   $("#modal-winner-submit").click(function(){
     var betDueInput = $("input[name='duedate']").val();
     var betDue = moment(betDueInput).format('MMMM D, YYYY'); // ** Convert date input 2019-04-12 format to April 12th, 2019 ** //

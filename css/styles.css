@@ -34,6 +34,7 @@ Darker seafoam #1cb29a
     font-size: 4rem;
   }
 
+
    .bet-container h2 {
     font-size: 2rem;
   }
@@ -110,10 +111,6 @@ h6.card-title {
   margin-bottom: .5rem;
 }
 
-.header {
-  height: 200px;
-}
-
 .logo {
   float: left;
 }
@@ -125,6 +122,11 @@ h6.card-title {
 p.card-text {
   margin-bottom: .5rem;
 }
+
+
+  .header {
+    margin-bottom: 1rem;
+  }
 
 .card-header {
   background-color: #3FC1AC;
@@ -206,7 +208,7 @@ h1 {
 
 
 .bet-container {
-  width: 35%;
+  width: 100%;
   margin-top: 30px;
   text-align: center;
 }
@@ -278,7 +280,7 @@ input[name="winner"]:checked + label {
 }
 
 input[name="winner"] + label:hover {
-  background-color: #a9e5db;
+  background-color: #b5e0d9;
 }
 
 input[name="winner"]:checked + label:hover {
