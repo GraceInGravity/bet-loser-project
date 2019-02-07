@@ -60,6 +60,8 @@ New bet will be added at the top of list of current bets | New bet created | Bet
 
 ## Known Bugs
 
+![placeholder img](https://raw.githubusercontent.com/GraceInGravity/bet-loser-project/blob/master/imgs/generic-person.png)
+
 * None known
 
 ## Support and contact details
