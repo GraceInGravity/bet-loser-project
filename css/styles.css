@@ -264,6 +264,10 @@ img[src="imgs/add-icon.png"] {
   text-align: center;
 }
 
+input:invalid {
+  border: 2px solid red;
+}
+
 input[name="winner"] {
   display:none;
 }

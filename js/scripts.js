@@ -49,8 +49,8 @@ Bet.prototype.getDisplayHTML = function () {
 
   html += '</div> \
   <h6 class="card-title">What\'s at Stake</h6> \
-  <p class="card-text"><strong>Amount of Bet:</strong> '  + this.betPenalty.penaltyAmount + '</p> \
   <p class="card-text"><strong>Penalty Category:</strong> ' + this.betPenalty.penaltyCategory + '</p> \
+  <p class="card-text"><strong>Amount of Bet:</strong> '  + this.betPenalty.penaltyAmount + '</p> \
   </div> \
   <div class="button-row text-center"><button type="button" class="complete btn btn-info" id="' + this.id + '" name="win-btn" data-toggle="modal" data-target="#declareWinnerModal">Select Winner</button></div> \
   </div> \
@@ -177,7 +177,7 @@ Bet.prototype.showChoresPenalty = function(){
 Bet.prototype.showPranksPenalty = function(){
   var prankList = ["sing in public 'Do You Want To Build a Snowman'", "deliver flowers to your crush",  " get at least $20 from strangers", "Jump into the Willamette river", " do the naked bike ride but not actually during the Naked Bike Ride", "wear a Make America Great Again hat to People's Co-op"];
   var randomIndex = Math.floor((Math.random() * prankList.length));
-  $("#list-item-" + this.id + " .card-body").append("<p>" + this.betLoser.userName + " is the loser! <br>" + this.betLoser.userName + " has until <strong>" + this.betPenalty.penaltyDue + "</strong> to do the prank: <strong>" + prankList[randomIndex] + "</strong> for <strong>" + this.betPenalty.penaltyAmount + " hour(s)</strong> for " + this.betWinner.userName + ".</p>");
+  $("#list-item-" + this.id + " .card-body").append("<p>" + this.betLoser.userName + " is the loser! <br>" + this.betLoser.userName + " has until <strong>" + this.betPenalty.penaltyDue + "</strong> to do the prank: <strong>" + prankList[randomIndex] + ".</p>");
   $("#list-item-" + this.id + " button:last-child").hide();
 }
 // Penalty.prototype.cashBet = function(penaltyAmount, userName, whichCharity){
@@ -274,8 +274,14 @@ $(function(){
     // Parameters are (betname, betnotes, betpenalty)
     var newBet = new Bet(betName, betNotes, betPenalty);
     console.log(betPenalty);
+
+    user1.userImg = "imgs/ward.jpeg";
+    user2.userImg = "imgs/tracy.jpeg";
+
     newBet.addUser(user1);
     newBet.addUser(user2);
+
+
 
     betBook.addBet(newBet);
 
