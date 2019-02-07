@@ -8,6 +8,7 @@ Coral #F25F5C
 Butter #FFE066
 Caribbean Blue #247BA0
 Seafoam Green #70C1B3
+Darker seafoam #1cb29a
 
 
 */
@@ -15,12 +16,13 @@ Seafoam Green #70C1B3
 /* ******** NON-MOBILE STYLES (*********) */
 @media only screen and (min-width: 600px) {
 
-  .container-fluid {
+  div.container-fluid {
     min-height: 100%;
+    padding: 20px 10% 10px 10%;
   }
 
   html {
-    font-size: 18px;
+    font-size: 21px;
   }
 
   label {
@@ -28,28 +30,40 @@ Seafoam Green #70C1B3
   top: 2px;
   }
 
-  h1 {
-    font-size: 5rem;
+  .container-fluid h1 {
+    font-size: 4rem;
   }
 
    .bet-container h2 {
     font-size: 2rem;
   }
 
-    .container h4 {
-     font-size: 3rem;
-   }
+  .container-fluid h4 {
+    font-size: 1.65rem;
+  }
+
+  .container-fluid img[src="imgs/add-icon-green-solid.png"] {
+    float: right;
+    width: 100px;
+  }
+
+  div.bet-container {
+    margin-top: 56px;
+    text-align: center;
+  }
 
 
 }
 
 /* ******** MOBILE FIRST DEFAULT STYLES (*********) */
-body {
-  background-color: #247BA0;
+html {
+  font-size: 24px;
 }
 
-html {
-  font-size: 21px;
+body {
+  background-color: #247BA0;
+  font-family: 'Dosis', sans-serif;
+  font-weight: 300;
 }
 
 .container-fluid {
@@ -60,13 +74,16 @@ html {
 input, select {
   /* display:block; */
   margin-bottom: 10px;
+}
 
+strong {
+  font-weight: 600;
 }
 
 /* ********** INPUT BORDER ON MOBILE ******** */
 textarea, input, select {
   border: 1px solid #ccc;
-  border-radius: 2px;
+  border-radius: 4px;
 }
 
 /* ***** FULL WIDTH INPUTS ON BET FORM */
@@ -89,27 +106,26 @@ li .card-header:hover {
 }
 
 h6.card-title {
-  margin-bottom: 0px;
+  font-family: 'Rock Salt', cursive;
+  margin-bottom: .5rem;
+
 }
 
 .results-display {
   display: none;
 }
 
-.card {
-  padding: 0px 0px 20px 0px;
-  text-align: left;
-
-}
 
 p.card-text {
   margin-bottom: .5rem;
 }
 
 .card-header {
+  background-color: #3FC1AC;
   width: 100%;
   font-size: 36px;
-  background-color: #3FC1AC;
+  font-weight: 600;
+  padding: .5rem 1.0rem;
 }
 
 h1, h2, h3 {
@@ -117,43 +133,80 @@ h1, h2, h3 {
 }
 
 h2 {
-  font-size: 1.5rem;
+  font-size: 1.25rem;
 }
 
 h2.active {
-  color: #3FC1AC;
+  color: #1cb29a; /* #3FC1AC */
+}
+
+.bet-container h2.active {
+  border-bottom: 3px solid #1cb29a;  /* #3FC1AC */
 }
 
 h2.complete {
   color: #50514F;
 }
 
+.bet-container h2.complete {
+  border-bottom: 3px solid #50514F;
+}
+
 .bet-container {
   padding: 10px;
-  background-color: #B5D7E5;
+  background-color: rgba(255, 255, 255, 0.85); /* #B5D7E5;*/
   border-radius: 10px;
+  box-shadow: 4px 4px 10px rgba(9, 55, 79, 0.8), 2px 2px 4px rgba(9, 55, 79, 0.8) ;
+}
+
+.modal-content {
+    background-color: #247BA0;
+}
+
+.modal-body {
+  background-color: rgba(255, 255, 255, 0.85);
+}
+
+h5.modal-title {
+  color: #FFE066;
 }
 
 h4 {
-  font-family: 'Mr Dafoe', cursive;
-  font-size: 2rem;
+  font-family: 'Rock Salt', cursive;
+  font-size: .8rem;
   margin-top: 0;
   color: #FFE066;
 }
 
+h5 {
+  font-family: 'Rock Salt', cursive;
+}
+
+/* font-family: 'Sedgwick Ave', cursive; */
+/* font-family: 'Rock Salt', cursive; */
+/* font-family: 'Yellowtail', cursive; */
+
 h1 {
+  font-size: 2rem;
   margin-bottom: 0;
   color: #F25F5C;
+  text-shadow: 1px 1px 2px rgba(9, 55, 79, 0.8);
 }
 
 
 .bet-container {
-  margin-top: 90px;
+  margin-top: 30px;
   text-align: center;
 }
 
-.bet-container h2 {
-  border-bottom: 3px solid black;
+img[src="imgs/add-icon-green.png"] {
+  float: right;
+  width: 60px;
+}
+
+img[src="imgs/add-icon-green-solid.png"] {
+  float: right;
+  width: 50px;
 }
 
 img[src="imgs/add-icon.png"] {
@@ -163,11 +216,19 @@ img[src="imgs/add-icon.png"] {
   top: -38px; */
 }
 
+#bet-form label {
+  margin-bottom: 2px;
+  font-weight: 600;
+  text-transform: uppercase;
+  font-size: 85%;
+}
+
 
 .card-body {
   display: flex;
   flex-flow: column nowrap;
   justify-content: center;
+  text-align: left;
 }
 
 .card-body > * {
@@ -224,8 +285,28 @@ button#modal-winner-submit {
   display: flex;
   flex-flow: row nowrap;
   justify-content: center;
+  margin-bottom: 20px;
 }
 
+button {
+  text-transform: uppercase;
+  letter-spacing: 0.05rem;
+  border: none;
+  font-weight: 600;
+}
+
+.btn-secondary {
+  background-color: #50514F;
+}
+
+button[type=submit], .btn-primary {
+  background-color: #70C1B3;
+  border-color: #70C1B3;
+}
+
+button.complete {
+  background-color: #247BA0;
+}
 
 .bet-descrip {
   font-size: 1.25rem;
@@ -241,6 +322,7 @@ Coral #F25F5C
 Butter #FFE066
 Caribbean Blue #247BA0
 Seafoam Green #70C1B3
+Darker seafoam #1cb29a
 
 
 */
