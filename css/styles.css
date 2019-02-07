@@ -115,6 +115,10 @@ h6.card-title {
   display: none;
 }
 
+.btn-success {
+  float: right;
+}
+
 
 p.card-text {
   margin-bottom: .5rem;
@@ -205,8 +209,7 @@ img[src="imgs/add-icon-green.png"] {
 }
 
 img[src="imgs/add-icon-green-solid.png"] {
-  float: right;
-  width: 50px;
+  width: 25px;
 }
 
 img[src="imgs/add-icon.png"] {

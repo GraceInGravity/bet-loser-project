@@ -66,15 +66,20 @@
     <!-- ************* THE PAGE ********** -->
     <!-- <div class="container"> -->
       <h1>Bet Loser</h1>
-      <a href="#"><img src="imgs/add-icon-green-solid.png"  data-toggle="modal" data-target="#addBetModal"></a>
       <h4>Making Losing Fun!</h4>
+      <button class="btn btn-sm btn-success" data-toggle="modal" data-target="#addBetModal"><img src="imgs/add-icon-green-solid.png">New Bet</button>
 
-      <div class="bet-container">
+
+      <div class="bet-container col-md-4">
         <h2 class="active">Active Bets</h2>
         <ul id="active-bets"></ul>
+      </div>
+      <div class="bet-container col-md-4">
         <h2 class="complete">Completed Bets</h2>
         <ul id="completed-bets"></ul>
       </div>
+
+
 
       <!-- ************** DECLARE WINNER MODAL ************ -->
       <!-- <button id='addBet'>Add a new bet</button> -->
