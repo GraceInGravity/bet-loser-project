@@ -1,3 +1,17 @@
+
+/* ********* COLORS ************** */
+
+/*
+
+Dark taupe #50514F
+Coral #F25F5C
+Butter #FFE066
+Caribbean Blue #247BA0
+Seafoam Green #70C1B3
+
+
+*/
+
 /* ******** NON-MOBILE STYLES (*********) */
 @media only screen and (min-width: 600px) {
 
@@ -22,10 +36,17 @@
     font-size: 2rem;
   }
 
+    .container h4 {
+     font-size: 3rem;
+   }
+
 
 }
 
 /* ******** MOBILE FIRST DEFAULT STYLES (*********) */
+body {
+  background-color: #247BA0;
+}
 
 html {
   font-size: 21px;
@@ -88,6 +109,7 @@ p.card-text {
 .card-header {
   width: 100%;
   font-size: 36px;
+  background-color: #3FC1AC;
 }
 
 h1, h2, h3 {
@@ -96,6 +118,32 @@ h1, h2, h3 {
 
 h2 {
   font-size: 1.5rem;
+}
+
+h2.active {
+  color: #3FC1AC;
+}
+
+h2.complete {
+  color: #50514F;
+}
+
+.bet-container {
+  padding: 10px;
+  background-color: #B5D7E5;
+  border-radius: 10px;
+}
+
+h4 {
+  font-family: 'Mr Dafoe', cursive;
+  font-size: 2rem;
+  margin-top: 0;
+  color: #FFE066;
+}
+
+h1 {
+  margin-bottom: 0;
+  color: #F25F5C;
 }
 
 
@@ -182,3 +230,17 @@ button#modal-winner-submit {
 .bet-descrip {
   font-size: 1.25rem;
 }
+
+
+/* ********* COLORS ************** */
+
+/*
+
+Dark taupe #50514F
+Coral #F25F5C
+Butter #FFE066
+Caribbean Blue #247BA0
+Seafoam Green #70C1B3
+
+
+*/
