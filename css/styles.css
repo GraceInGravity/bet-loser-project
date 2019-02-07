@@ -52,6 +52,9 @@ Darker seafoam #1cb29a
     text-align: center;
   }
 
+  li.card {
+    width: 50%;
+  }
 
 }
 
@@ -93,11 +96,15 @@ textarea, input, select {
 
 
 ul {
-  padding : 0;
+  padding: 0;
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: flex-start;
 }
 
 li {
   list-style-type: none;
+  flex: 0 0 auto;
   width: 100%;
 }
 
