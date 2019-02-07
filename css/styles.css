@@ -43,13 +43,13 @@ Darker seafoam #1cb29a
   }
 
   .container-fluid img[src="imgs/add-icon-green-solid.png"] {
-    float: right;
-    width: 100px;
+    width: 40px;
   }
 
   div.bet-container {
     margin-top: 56px;
     text-align: center;
+    width: 49%;
   }
 
 
@@ -108,17 +108,19 @@ li .card-header:hover {
 h6.card-title {
   font-family: 'Rock Salt', cursive;
   margin-bottom: .5rem;
+}
 
+.header {
+  height: 200px;
+}
+
+.logo {
+  float: left;
 }
 
 .results-display {
   display: none;
 }
-
-.btn-success {
-  float: right;
-}
-
 
 p.card-text {
   margin-bottom: .5rem;
@@ -199,6 +201,7 @@ h1 {
 
 
 .bet-container {
+  width: 35%;
   margin-top: 30px;
   text-align: center;
 }
@@ -224,6 +227,14 @@ img[src="imgs/add-icon.png"] {
   font-weight: 600;
   text-transform: uppercase;
   font-size: 85%;
+}
+
+.active-bet-display {
+  float: left;
+}
+
+.completed-bet-display {
+  float: right;
 }
 
 
@@ -304,16 +315,52 @@ button {
 
 button[type=submit], .btn-primary {
   background-color: #70C1B3;
-  border-color: #70C1B3;
+  border: 0;
+}
+
+button.btn-primary:hover {
+  background-color: #1cb29a;
+  border: 0;
+}
+
+btn-outline-secondary:hover {
+  background-color: #50514F;
+  border: 0;
 }
 
 button.complete {
   background-color: #247BA0;
 }
 
+.add-bet {
+  background-color: rgba(255, 255, 255, 0.85); /* #B5D7E5;*/
+  color:  #1cb29a;
+  border: 0;
+}
+
+button.add-bet:hover {
+  background-color:#1cb29a;
+  color: #fff;
+}
+
+
 .bet-descrip {
   font-size: 1.25rem;
 }
+
+/* form styles for rotating questions */
+.vertical-center {
+    position: relative;
+    top: 50%;
+    -ms-transform: translateY(-50%);
+    -webkit-transform: translateY(-50%);
+    transform: translateY(-50%);
+}
+
+.question-container:not(.current-question) {
+	display : none;
+}
+
 
 
 /* ********* COLORS ************** */

@@ -200,15 +200,41 @@ Bet.prototype.showPranksPenalty = function(){
 //     // Display/open charityWebsite[whichCharity;]
 // }
 
+//Form cycling
 
+function changeQuestion(questionIndex) {
+	$(".current-question").fadeOut();
 
+	setTimeout(function(){
+		$(".current-question").removeClass("current-question");
+		$("#q" + questionIndex).addClass("current-question");
+		$(".current-question").fadeIn();
+	},300);
+}
 
 $(function(){
   var betBook = new BetBook();
   var tempBetId = 0;
+  var questionIndex = 1;
+
+  $(".add-bet").click(function() {
+    questionIndex = 1;
+    $(".current-question").removeClass("current-question");
+		$("#q1").addClass("current-question").show();
+  });
+
+  $(".next").click(function(){
+    questionIndex++;
+    changeQuestion(questionIndex);
+  });
+
+  $(".back").click(function(){
+    questionIndex--;
+    changeQuestion(questionIndex);
+  });
+
 
   $("#bet-form").submit(function(event){
-    console.log("hello from submit button");
     event.preventDefault();
     var betName = $("input[name='bet-name']").val();
     var betUser1 = $("input[name='user1']").val();
@@ -260,12 +286,9 @@ $(function(){
 
   });
 
-  $("#addBet").click(function() {
-    $("#active-bets").hide();
-    $("#bet-form").show();
-  });
 
   $("#active-bets").on("click", ".complete", function(){
+
     tempBetId = $(this).attr('id');
     $(".results-display").show();
     betBook.bets[tempBetId].showWinWindow();
