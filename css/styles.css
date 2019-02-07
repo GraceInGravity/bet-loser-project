@@ -134,6 +134,11 @@ p.card-text {
   padding: .5rem 1.0rem;
 }
 
+.completed  {
+  background-color: #50514F;
+  color: #fff;
+}
+
 h1, h2, h3 {
   font-family: 'Fontdiner Swanky', cursive;
 }
@@ -229,6 +234,10 @@ img[src="imgs/add-icon.png"] {
   font-size: 85%;
 }
 
+.amount {
+  display: none;
+}
+
 .active-bet-display {
   float: left;
 }
@@ -259,15 +268,21 @@ input[name="winner"] {
 
 input[name="winner"] + label {
   text-align: center;
+  padding-bottom: 0px;
+  border-radius: 6px;
 }
 
 input[name="winner"]:checked + label {
   display: inline-block;
-  color: red;
+  background-color: #70C1B3;
 }
 
 input[name="winner"] + label:hover {
-  background-color: blue;
+  background-color: #a9e5db;
+}
+
+input[name="winner"]:checked + label:hover {
+  background-color: #70C1B3;
 }
 
 .bet-user-container-row {
@@ -280,7 +295,7 @@ input[name="winner"] + label:hover {
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-right: 20px;
+  margin: 8px 10px 0px 10px;
   text-align: center;
 }
 
@@ -328,9 +343,6 @@ btn-outline-secondary:hover {
   border: 0;
 }
 
-button.complete {
-  background-color: #247BA0;
-}
 
 .add-bet {
   background-color: rgba(255, 255, 255, 0.85); /* #B5D7E5;*/
