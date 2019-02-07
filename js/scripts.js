@@ -102,6 +102,8 @@ Bet.prototype.showPenalty = function(){
     this.showPranksPenalty();
   } else {console.log("Problem with penaltyCategory choice")}
   $("#list-item-" + this.id).prependTo("#completed-bets");
+  $("#list-item-" + this.id).draggable(); //allows it to be dragged
+
 }
 
 Bet.prototype.assignWinner = function() {
@@ -197,7 +199,21 @@ Bet.prototype.showPranksPenalty = function(){
 //     // Display/open charityWebsite[whichCharity;]
 // }
 
-
+// function allowDrop(ev) {  //allows element to be dropped somewhere
+//   ev.preventDefault();
+// }
+//
+// function drag(ev) {
+//   alert("drag event fires")
+//   ev.dataTransfer.setData("text", ev.target.id);
+// }
+//
+// function drop(ev) {
+//   ev.preventDefault();
+//   lastClicked.hide();
+//    alert("test");
+//
+// }
 
 
 $(function(){
@@ -270,6 +286,13 @@ $(function(){
 
   $("#modal-winner-submit").click(function(){
     betBook.bets[tempBetId].showPenalty();
+  });
+ // drop on trashcan
+  $("#trash").droppable({
+    drop: function(event,li) {
+      alert("dropped");
+      $(li.draggable.remove());
+    }
   });
 
 });
