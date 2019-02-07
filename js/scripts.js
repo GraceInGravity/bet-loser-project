@@ -33,10 +33,11 @@ Bet.prototype.assignId = function(user) {
   this.currentUserIndex += 1;
 }
 
+// ********* BET DETAILS CARD ****
 Bet.prototype.getDisplayHTML = function () {
   var html  = '\
   <li class="card" id="list-item-' + this.id + '"> \
-  <button class="card-header" type="button" data-toggle="collapse" data-target="#details'+ this.id + '" aria-expanded="false" aria-controls="collapseExample">' + this.betName + ' bet#' + this.id + '</button> \
+  <div class="card-header" data-toggle="collapse" data-target="#details'+ this.id + '" aria-expanded="false" aria-controls="collapseExample">' + this.betName + '</div> \
   <div class="collapse" id="details' + this.id + '"> \
   <div class="card-body"> \
   <p class="card-text bet-descrip">' + this.betTerms + '</p> \
@@ -47,17 +48,18 @@ Bet.prototype.getDisplayHTML = function () {
   }
 
   html += '</div> \
-  <h5 class="card-title">What\'s at Stake</h5> \
-  <p class="card-text"><strong>Amount:</strong> '  + this.betPenalty.penaltyAmount + '</p> \
-  <p class="card-text"><strong>Category:</strong> ' + this.betPenalty.penaltyCategory + '</p> \
-  <p class="card-text"><strong>Paid By:</strong> ' + this.betPenalty.penaltyDue + '</p> \
+  <h6 class="card-title">What\'s at Stake</h6> \
+  <p class="card-text"><strong>Amount of Bet:</strong> '  + this.betPenalty.penaltyAmount + '</p> \
+  <p class="card-text"><strong>Penalty Category:</strong> ' + this.betPenalty.penaltyCategory + '</p> \
   </div> \
   <div class="button-row text-center"><button type="button" class="complete btn btn-info" id="' + this.id + '" name="win-btn" data-toggle="modal" data-target="#declareWinnerModal">Select Winner</button></div> \
   </div> \
   </li>'
-
+  $("span.active-bet-name").text(this.betName);
   return html;
 };
+// Payment due to be added to card when moved to completed
+  // <p class="card-text"><strong>Pay Up By:</strong> ' + this.betPenalty.penaltyDue + '</p> \
 
 function User(userName, userEmail, userBank) {
   this.userName = userName;
@@ -135,10 +137,10 @@ Bet.prototype.showDonationPenalty = function() {
 }
 
 Bet.prototype.getDonationHTML = function(charityObject) {
-  return "<p>" + this.betLoser.userName + " owes $" + this.betPenalty.penaltyAmount + " to " + charityObject.name + ". You can reach them by email at <a href='mailto:" + charityObject.email + "? subject=I Lost A Bet'>" + charityObject.email + "</a>, or  you can visit their website at <a href='https://www." + charityObject.website + "'>" +  charityObject.website +    "</a>. Please donate by " + this.betPenalty.penaltyDue + ".</p>";
+  return "<p>" + this.betLoser.userName + " owes <strong>$" + this.betPenalty.penaltyAmount + "</strong> to <strong>" + charityObject.name + "</strong>. Reach them by email at <a href='mailto:" + charityObject.email + "? subject=I Lost A Bet'>" + charityObject.email + "</a>, or visit their website at <a href='https://www." + charityObject.website + "'>" +  charityObject.website +    "</a>. Donate by <strong>" + this.betPenalty.penaltyDue + "</strong>.</p>";
 }
 
-//volunteer results
+// ******** VOLUNTEER HOURS ******** volunteer results
 Bet.prototype.showVolunteerPenalty = function() {
   var charityObject = this.getCharityInfo();
   $("#list-item-" + this.id + " .card-body").append(this.getVolunteerHTML(charityObject));
@@ -146,9 +148,10 @@ Bet.prototype.showVolunteerPenalty = function() {
 }
 
 Bet.prototype.getVolunteerHTML = function(charityObject) {
-  return "<p>" + this.betLoser.userName + " owes " + this.betPenalty.penaltyAmount + " volunteer hour" + this.addAdditionalS() + " to " + charityObject.name + ". You can reach them by email at <a href='mailto:" + charityObject.email + "?subject=I Lost A Bet'>" + charityObject.email + "</a>, or you can visit their website at <a href='https://www." + charityObject.website + "'>" +  charityObject.website + "</a>. Please donate by " + this.betPenalty.penaltyDue + ".</p>";
+  return "<p>" + this.betLoser.userName + " owes <strong>" + this.betPenalty.penaltyAmount + " volunteer hour(s)</strong> " + this.addAdditionalS() + " to <strong>" + charityObject.name + "</strong>. Reach them by email at <a href='mailto:" + charityObject.email + "?subject=I Lost A Bet'>" + charityObject.email + "</a>, or visit their website at <a href='https://www." + charityObject.website + "'>" +  charityObject.website + "</a>. Donate by <strong>" + this.betPenalty.penaltyDue + "</strong>.</p>";
 }
 
+// ********* MONEY *********
 Bet.prototype.addAdditionalS = function() {
   if(this.betPenalty.penaltyAmount == 1) {
     return "";
@@ -157,24 +160,26 @@ Bet.prototype.addAdditionalS = function() {
 
 // Change to volunteer
 Bet.prototype.showMoneyPenalty = function() {
-  $("#list-item-" + this.id + " .card-body").append("<p>" + this.betLoser.userName + " is the loser! <br>" + this.betLoser.userName + " has until " + this.betPenalty.penaltyDue + " to pay " + this.betWinner.userName + " $" + this.betPenalty.penaltyAmount + ".</p>");
+  $("#list-item-" + this.id + " .card-body").append("<p>" + this.betLoser.userName + " is the loser! <br>" + this.betLoser.userName + " has until <strong>" + this.betPenalty.penaltyDue + "</strong> to pay " + this.betWinner.userName + " <strong>$" + this.betPenalty.penaltyAmount + "</strong>.</p>");
   $("#list-item-" + this.id + " button:last-child").hide();
 }
 
+// ****** CHORES ********
 Bet.prototype.showChoresPenalty = function(){
   var choreChoice = ["laundry", "child or pet sitting", "house cleaning", "car washing", "volunteer at charity of winner's choice", "jog to do my errands"];
   var randomIndex = Math.floor((Math.random() * choreChoice.length));
 
-  $("#list-item-" + this.id + " .card-body").append("<p>" + this.betLoser.userName + " is the loser! <br>" + this.betLoser.userName + " has until " + this.betPenalty.penaltyDue + " to work doing " + choreChoice[randomIndex] + " for " + this.betPenalty.penaltyAmount + " hour" + this.addAdditionalS() + " of hard labor for " + this.betWinner.userName + ".</p>");
+  $("#list-item-" + this.id + " .card-body").append("<p>" + this.betLoser.userName + " is the loser! <br>" + this.betLoser.userName + " has until <strong>" + this.betPenalty.penaltyDue + "</strong> to work doing <strong>" + choreChoice[randomIndex] + "</strong> for <strong>" + this.betPenalty.penaltyAmount + " hour(s)</strong>" + this.addAdditionalS() + " of hard labor for " + this.betWinner.userName + ".</p>");
   $("#list-item-" + this.id + " button:last-child").hide();
   // return "You owe" + timeLevel + "hours doing " + timeChoice[penaltyChoice] + "for the winner";
   // Replace for the winner with winner name
 }
 
+// ******  PRANK  **********
 Bet.prototype.showPranksPenalty = function(){
   var prankList = ["sing in public 'Do You Want To Build a Snowman'", "deliver flowers to your crush",  " get at least $20 from strangers", "Jump into the Willamette river", " do the naked bike ride but not actually during the Naked Bike Ride", "wear a Make America Great Again hat to People's Co-op"];
   var randomIndex = Math.floor((Math.random() * prankList.length));
-  $("#list-item-" + this.id + " .card-body").append("<p>" + this.betLoser.userName + " is the loser! <br>" + this.betLoser.userName + " has until " + this.betPenalty.penaltyDue + " to do the prank: " + prankList[randomIndex] + " for " + this.betPenalty.penaltyAmount + " hours for " + this.betWinner.userName + ".</p>");
+  $("#list-item-" + this.id + " .card-body").append("<p>" + this.betLoser.userName + " is the loser! <br>" + this.betLoser.userName + " has until <strong>" + this.betPenalty.penaltyDue + "</strong> to do the prank: <strong>" + prankList[randomIndex] + "</strong> for <strong>" + this.betPenalty.penaltyAmount + " hour(s)</strong> for " + this.betWinner.userName + ".</p>");
   $("#list-item-" + this.id + " button:last-child").hide();
 }
 // Penalty.prototype.cashBet = function(penaltyAmount, userName, whichCharity){
@@ -199,29 +204,54 @@ Bet.prototype.showPranksPenalty = function(){
 //     // Display/open charityWebsite[whichCharity;]
 // }
 
-// function allowDrop(ev) {  //allows element to be dropped somewhere
-//   ev.preventDefault();
-// }
-//
-// function drag(ev) {
-//   alert("drag event fires")
-//   ev.dataTransfer.setData("text", ev.target.id);
-// }
-//
-// function drop(ev) {
-//   ev.preventDefault();
-//   lastClicked.hide();
-//    alert("test");
-//
-// }
+//Form cycling
 
+function changeQuestion(questionIndex) {
+	$(".current-question").fadeOut();
+
+	setTimeout(function(){
+		$(".current-question").removeClass("current-question");
+		$("#q" + questionIndex).addClass("current-question");
+		$(".current-question").fadeIn();
+	},300);
+}
 
 $(function(){
   var betBook = new BetBook();
   var tempBetId = 0;
+  var questionIndex = 1;
+
+  $(".add-bet").click(function() {
+    questionIndex = 1;
+    $(".current-question").removeClass("current-question");
+		$("#q1").addClass("current-question").show();
+  });
+
+  $(".next").click(function(){
+    questionIndex++;
+    changeQuestion(questionIndex);
+  });
+
+  $(".back").click(function(){
+    questionIndex--;
+    changeQuestion(questionIndex);
+  });
+
+  $("select[name='bet-select']").change(function(){
+    if($(this).val() === 'donation' || $(this).val() === 'money') {
+      console.log($(this).val());
+      $(".amount").show();
+      $("label[for='amount']").text("$ amount of your bet");
+    } else if($(this).val() === 'volunteer') {
+      $(".amount").show();
+      $("label[for='amount']").text("Hours volunteering");
+    } else {
+      $(".amount").hide();
+    }
+  });
+
 
   $("#bet-form").submit(function(event){
-    console.log("hello from submit button");
     event.preventDefault();
     var betName = $("input[name='bet-name']").val();
     var betUser1 = $("input[name='user1']").val();
@@ -230,20 +260,18 @@ $(function(){
     var betUser2Email = $("input[name='email2']").val();
     var betCategory = $("select[name='bet-select'] option:selected").val();
     var betAmount = $("input[name='amount']").val();
-    var betDueInput = $("input[name='duedate']").val();
     var betNotes = $("textarea[name='bet-notes']").val();
     var betPenalty = "Bet Penalty Goes Here";
 
-    var betDueDays = Date.parse($("input[name='duedate']").val()); // ** In case we want to do math with the date **//
+    var betDueDays = Date.parse($("input[name='duedate']").val()); // ** IGNORE THIS LINE *** In case we want to do math with the date **//
     // var betDue = new Date()
-    var betDue = moment(betDueInput).format('MMMM D, YYYY'); // ** Convert date input 2019-04-12 format to April 12th, 2019 ** //
 
     // Parameter is zero waiting for bank account field
     var user1 = new User(betUser1, betUser1Email, 0);
     var user2 = new User(betUser2, betUser2Email, 0);
 
     // Parameters are (category, duration, betamount, due date)
-    var betPenalty = new Penalty(betCategory, 0, betAmount, betDue);
+    var betPenalty = new Penalty(betCategory, 0, betAmount);
     console.log(betPenalty);
     // Parameters are (betname, betnotes, betpenalty)
     var newBet = new Bet(betName, betNotes, betPenalty);
@@ -273,10 +301,6 @@ $(function(){
 
   });
 
-  $("#addBet").click(function() {
-    $("#active-bets").hide();
-    $("#bet-form").show();
-  });
 
   $("#active-bets").on("click", ".complete", function(){
     tempBetId = $(this).attr('id');
@@ -284,8 +308,15 @@ $(function(){
     betBook.bets[tempBetId].showWinWindow();
   });
 
+  // **** WINNER SELECTION MODAL ***
   $("#modal-winner-submit").click(function(){
+    var betDueInput = $("input[name='duedate']").val();
+    var betDue = moment(betDueInput).format('MMMM D, YYYY'); // ** Convert date input 2019-04-12 format to April 12th, 2019 ** //
+
+    // var betPenalty = new Penalty(betCategory, 0, betAmount, betDue);
+    betBook.bets[tempBetId].betPenalty.penaltyDue = betDue;
     betBook.bets[tempBetId].showPenalty();
+    $(".card-header").addClass("completed");
   });
  // drop on trashcan
   $("#trash").droppable({
