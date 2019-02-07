@@ -11,15 +11,14 @@
   <script type="text/javascript" src="js/moment.min.js"></script> <!-- ** DATE FORMATTING -- >
 
     <!-- Google font API -->
-    <link href="https://fonts.googleapis.com/css?family=Fontdiner+Swanky" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css?family=Rock+Salt|Sedgwick+Ave|Yellowtail" rel="stylesheet">
-
+    <link href="https://fonts.googleapis.com/css?family=Fontdiner+Swanky|Rock+Salt|Dosis:300,400,500,600" rel="stylesheet">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">  <!-- *** FOR MOBILE *** -->
     <title>Bet Loser - Making Losing Fun</title>
   </head>
   <body>
     <div class="container-fluid">
 
+      <!-- ************* ADD BET MODAL ************ -->
       <div class="modal" id="addBetModal" tabindex="-1" role="dialog">
         <div class="modal-dialog" role="document">
           <div class="modal-content">
@@ -64,10 +63,11 @@
         </div>
       </div>
     </div>
+    <!-- ************* THE PAGE ********** -->
     <div class="container">
       <h1>Bet Loser</h1>
       <h4>Making Losing Fun!</h4>
-      <a href="#"><img src="imgs/add-icon.png"  data-toggle="modal" data-target="#addBetModal"></a>
+      <a href="#"><img src="imgs/add-icon-green-solid.png"  data-toggle="modal" data-target="#addBetModal"></a>
 
       <div class="bet-container">
         <h2 class="active">Active Bets</h2>
@@ -76,7 +76,7 @@
         <ul id="completed-bets"></ul>
       </div>
 
-
+      <!-- ************** DECLARE WINNER MODAL ************ -->
       <!-- <button id='addBet'>Add a new bet</button> -->
       <div class="modal" id="declareWinnerModal" tabindex="-1" role="dialog">
         <div class="modal-dialog" role="document">
