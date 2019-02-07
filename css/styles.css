@@ -16,8 +16,9 @@ Darker seafoam #1cb29a
 /* ******** NON-MOBILE STYLES (*********) */
 @media only screen and (min-width: 600px) {
 
-  .container-fluid {
+  div.container-fluid {
     min-height: 100%;
+    padding: 20px 10% 10px 10%;
   }
 
   html {
@@ -29,7 +30,7 @@ Darker seafoam #1cb29a
   top: 2px;
   }
 
-  .container h1 {
+  .container-fluid h1 {
     font-size: 4rem;
   }
 
@@ -37,8 +38,18 @@ Darker seafoam #1cb29a
     font-size: 2rem;
   }
 
-  .container h4 {
-    font-size: 2rem;
+  .container-fluid h4 {
+    font-size: 1.65rem;
+  }
+
+  .container-fluid img[src="imgs/add-icon-green-solid.png"] {
+    float: right;
+    width: 100px;
+  }
+
+  div.bet-container {
+    margin-top: 56px;
+    text-align: center;
   }
 
 
@@ -122,7 +133,7 @@ h1, h2, h3 {
 }
 
 h2 {
-  font-size: 1.5rem;
+  font-size: 1.25rem;
 }
 
 h2.active {
@@ -162,7 +173,7 @@ h5.modal-title {
 
 h4 {
   font-family: 'Rock Salt', cursive;
-  font-size: 1.0rem;
+  font-size: .8rem;
   margin-top: 0;
   color: #FFE066;
 }
@@ -184,7 +195,7 @@ h1 {
 
 
 .bet-container {
-  margin-top: 90px;
+  margin-top: 30px;
   text-align: center;
 }
 
@@ -195,7 +206,7 @@ img[src="imgs/add-icon-green.png"] {
 
 img[src="imgs/add-icon-green-solid.png"] {
   float: right;
-  width: 60px;
+  width: 50px;
 }
 
 img[src="imgs/add-icon.png"] {
