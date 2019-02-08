@@ -83,8 +83,8 @@ strong {
 
 #trash {
   float:right;
-  height: 40px;
-  width: 40px;
+  height: 60px;
+  width: 60px;
 
 }
 
@@ -245,6 +245,10 @@ img[src="imgs/add-icon.png"] {
 
 .amount {
   display: none;
+}
+
+.bet-display {
+  margin-top: 20px; 
 }
 
 .active-bet-display {
